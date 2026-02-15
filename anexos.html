@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente IA para Automatización de Procesos Sorimex | Sustentación Técnica</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-body: #f8fafc;
+            /* ... unaffected vars ... */
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+            /* New light code bg */
+            --code-text: #334155;
+            /* New light code text */
+            /* ... */
+
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            /* display: flex; REMOVED - breaks header */
+            min-height: 100vh;
+        }
+
+        .layout-container {
+            display: flex;
+            min-height: calc(100vh - 73px);
+            /* Adjust for header height */
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 300px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            flex-shrink: 0;
+            z-index: 50;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background-color: #eff6ff;
+            color: var(--primary);
+            border-color: #dbeafe;
+        }
+
+        .nav-number {
+            background: #e2e8f0;
+            color: var(--secondary);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            margin-right: 0.75rem;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .nav-link.active .nav-number {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* FAQ Cards */
+        .faq-item {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            scroll-margin-top: 2rem;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .faq-header {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+        }
+
+        .faq-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .faq-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #e2e8f0;
+            line-height: 1;
+        }
+
+        .icon-toggle {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: var(--secondary);
+            stroke-width: 2;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .icon-toggle {
+            transform: rotate(180deg);
+            stroke: var(--primary);
+        }
+
+        .faq-item.open .faq-number {
+            color: var(--primary);
+            opacity: 0.2;
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            background: #fcfcfc;
+        }
+
+        .faq-item.open .faq-body {
+            max-height: 5000px;
+            transition: max-height 1s ease-in-out;
+            border-top: 1px solid var(--border);
+        }
+
+        .content {
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Content Styling */
+        .content h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+        }
+
+        .content h3:first-child {
+            margin-top: 0;
+        }
+
+        .p-block {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-family: 'Menlo', 'Monaco', monospace;
+            font-size: 0.85rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+
+        .function {
+            color: #d2a8ff;
+        }
+
+        /* Highlights & Badges */
+        .highlight {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .alert-box {
+            padding: 1rem;
+            border-radius: 8px;
+            background: #fffbea;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            margin: 1rem 0;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        /* Conclusion Section */
+        .conclusion-section {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            /* Softer deep blue */
+            color: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin-top: 4rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .conclusion-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .conclusion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .risk-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .risk-title {
+            font-weight: 700;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-val {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: background 0.2s;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .layout-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .sidebar.mobile-open .nav-links {
+                display: flex;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Utility */
+        .hidden {
+            display: none;
+        }
+
+        strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER with Navigation -->
+    <header
+        style="background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <div
+            style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="brand"
+                style="font-weight: 800; color: var(--primary); font-size: 1.25rem; text-decoration: none;">CRITERIO
+                AI</a>
+            <nav style="display: flex; gap: 1.5rem;">
+                <a href="index.html"
+                    style="text-decoration: none; color: var(--text-muted); font-weight: 500;">Propuesta</a>
+                <a href="cronograma.html"
+                    style="text-decoration: none; color: var(--text-muted); font-weight: 500;">Cronograma</a>
+                <a href="#" style="text-decoration: none; color: var(--primary); font-weight: 600;">Sustentación
+                    Técnica</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout-container" style="margin-top: 0;">
+        <!-- SIDEBAR -->
+        <nav class="sidebar" style="top: 80px; height: calc(100vh - 80px);">
+            <div class="sidebar-header">
+                <div class="brand">CRITERIO AI</div>
+                <div class="brand-subtitle">Agente IA Sorimex</div>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <!-- ANEXO A GROUP -->
+                <div class="nav-group-title"
+                    style="padding: 0.5rem 1rem; color: var(--secondary); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; margin-top: 1rem;">
+                    ANEXO A: ANÁLISIS TÉCNICO</div>
+                <a href="#anexo-a-intro" class="nav-link"><span class="nav-number">A1</span> Alcance y Datos</a>
+                <a href="#anexo-a-logic" class="nav-link"><span class="nav-number">A2</span> Lógica Decodificada</a>
+                <a href="#anexo-a-findings" class="nav-link"><span class="nav-number">A3</span> Hallazgos Clave</a>
+                <a href="#anexo-a-implications" class="nav-link"><span class="nav-number">A4</span> Implicaciones</a>
+
+                <!-- ANEXO B GROUP -->
+                <div class="nav-group-title"
+                    style="padding: 0.5rem 1rem; color: var(--secondary); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; margin-top: 1.5rem;">
+                    ANEXO B: FAQ SUSTENTACIÓN</div>
+                <a href="#q1" class="nav-link"><span class="nav-number">01</span> Access & Integración</a>
+                <a href="#q2" class="nav-link"><span class="nav-number">02</span> Riesgos e Imprevistos</a>
+                <a href="#q3" class="nav-link"><span class="nav-number">03</span> Tiempo de Adopción</a>
+                <a href="#q4" class="nav-link"><span class="nav-number">04</span> Fidelidad de PDFs</a>
+                <a href="#q5" class="nav-link"><span class="nav-number">05</span> Migración Futura</a>
+                <a href="#q6" class="nav-link"><span class="nav-number">06</span> Confianza vs Agencia</a>
+                <a href="#q7" class="nav-link"><span class="nav-number">07</span> Bugs y Soporte</a>
+                <a href="#q8" class="nav-link"><span class="nav-number">08</span> Cambios de Alcance</a>
+                <a href="#q9" class="nav-link"><span class="nav-number">09</span> Manejo de Excepciones</a>
+                <a href="#q10" class="nav-link"><span class="nav-number">10</span> Mantenibilidad</a>
+
+                <a href="#conclusion" class="nav-link"
+                    style="margin-top: 1rem; border-top: 1px solid var(--border); border-radius: 0; padding-top: 1rem;"><span
+                        class="nav-number">★</span> Conclusión Final</a>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <section class="hero">
+                <h1>Agente IA para Automatización de Procesos Sorimex</h1>
+                <p>Documentación técnica unificada: Resumen del análisis de sistema previo y sustentación de preguntas
+                    frecuentes.</p>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- ANEXO A: RESUMEN DEL ANÁLISIS TÉCNICO      -->
+            <!-- ========================================== -->
+
+            <h2
+                style="margin: 3rem 0 1.5rem 0; font-size: 1.5rem; color: var(--primary); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">
+                ANEXO A: RESUMEN DEL ANÁLISIS TÉCNICO</h2>
+
+            <!-- A1: ALCANCE -->
+            <div class="faq-item" id="anexo-a-intro">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number" style="color:var(--text-muted); opacity:0.5">A1</span>
+                        Alcance del Análisis Completado
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">Hemos analizado <strong>Maestro.mdb (Backend)</strong> y <strong>sorimex.mdb
+                                (Frontend)</strong>, documentando 34 tablas y 2,639 registros históricos.</p>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Componente</th>
+                                        <th>Elementos Analizados</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tablas</td>
+                                        <td>34 tablas</td>
+                                        <td>✅ Mapeadas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relaciones</td>
+                                        <td>Estructura completa</td>
+                                        <td>✅ Documentadas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lógica VBA</td>
+                                        <td>Código crítico de negocio</td>
+                                        <td>✅ Decodificado</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Informes</td>
+                                        <td>Templates PDF existentes</td>
+                                        <td>✅ Identificados</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- A2: LÓGICA -->
+            <div class="faq-item" id="anexo-a-logic">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number" style="color:var(--text-muted); opacity:0.5">A2</span>
+                        Lógica de Negocio Decodificada
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">Identificamos y documentamos los algoritmos críticos que gobiernan la
+                            operación
+                            actual:</p>
+
+                        <h3>Algoritmos Críticos</h3>
+                        <ul>
+                            <li><span class="badge-success">Cálculo FOB</span> 8 métodos diferentes según cláusula (FOB,
+                                CIF, CFR, EXW, etc).</li>
+                            <li><span class="badge-success">Numeración</span> Algoritmo de <code>FPFNUM</code> y
+                                <code>PEDNUM</code> (PRO-NNN-AA).
+                            </li>
+                            <li><span class="badge-success">Pesos</span> Fórmula:
+                                <code>(Cantidad ÷ Unid.Emb) × Peso.Emb</code>.
+                            </li>
+                            <li><span class="badge-success">Estados</span> Ciclo de vida completo (Pendiente → Generada
+                                →
+                                Aprobada → Cancelada).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- A3: HALLAZGOS -->
+            <div class="faq-item" id="anexo-a-findings">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number" style="color:var(--text-muted); opacity:0.5">A3</span>
+                        Hallazgos Clave y Complejidad
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block"><strong>Nivel de Complejidad: MEDIO-ALTO</strong>. Esto valida la estimación
+                            de
+                            5.5 meses.</p>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Fortalezas ✅</th>
+                                        <th>Desafíos ⚠️</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Datos históricos limpios</td>
+                                        <td>Lógica crítica embebida en VBA</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nomenclatura consistente</td>
+                                        <td>Dependencias entre módulos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Informes profesionales</td>
+                                        <td>Cálculos complejos a replicar</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- A4: IMPLICACIONES -->
+            <div class="faq-item" id="anexo-a-implications">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="nav-number" style="color:var(--text-muted); opacity:0.5">A4</span>
+                        Implicaciones para el Proyecto
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+
+                        <h3>Confianza en las Estimaciones</h3>
+                        <p class="p-block">La estimación de <strong>359 horas (22 semanas)</strong> está basada en datos
+                            reales:</p>
+                        <ul>
+                            <li>✅ Conteo real de tablas a integrar (34).</li>
+                            <li>✅ Complejidad medida de la lógica VBA.</li>
+                            <li>✅ Número conocido de informes a automatizar (2).</li>
+                            <li>✅ Cantidad de validaciones a implementar.</li>
+                            <li>✅ Volumen de datos históricos para testing (2,639 registros).</li>
+                        </ul>
+
+                        <div style="margin-top: 1.5rem; margin-bottom: 2rem;">
+                            <strong>Comparación de precisión:</strong>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Enfoque</th>
+                                            <th>Base de Estimación</th>
+                                            <th>Precisión Típica</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sin análisis previo</td>
+                                            <td>Experiencia general</td>
+                                            <td>±40% error</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Análisis superficial</td>
+                                            <td>Revisión rápida</td>
+                                            <td>±25% error</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Nuestro análisis</strong></td>
+                                            <td><strong>Medición real</strong></td>
+                                            <td><strong>±10% error ✅</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h3>Reducción de Riesgos</h3>
+                        <p class="p-block">Riesgos mitigados gracias al análisis previo:</p>
+                        <div class="code-block" style="background: var(--bg-body); border: none; padding: 0;">
+                            ✅ "Es más complejo de lo pensado"
+                            → Ya conocemos la complejidad exacta
+
+                            ✅ "Necesitamos más tiempo por lógica oculta"
+                            → Toda la lógica crítica está documentada
+
+                            ✅ "El sistema no funciona como esperábamos"
+                            → Analizamos datos reales, conocemos el comportamiento
+
+                            ✅ "Nos falta información para continuar"
+                            → Tenemos la información necesaria
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">Calidad del Resultado Final</h3>
+                        <p class="p-block">El análisis previo garantiza tres pilares fundamentales:</p>
+
+                        <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                            <div class="alert-box"
+                                style="margin:0; background: #eff6ff; border-color: #bfdbfe; color: #1e40af;">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <div>
+                                    <strong>Fidelidad al sistema actual</strong>
+                                    <br>Los cálculos serán idénticos (conocemos las fórmulas exactas), las validaciones
+                                    serán las mismas y los PDFs serán iguales.
+                                </div>
+                            </div>
+
+                            <div class="alert-box"
+                                style="margin:0; background: #f0fdf4; border-color: #bbf7d0; color: #166534;">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                                    </path>
+                                </svg>
+                                <div>
+                                    <strong>Testing exhaustivo posible</strong>
+                                    <br>Podemos comparar resultados automáticos vs manuales usando datos históricos
+                                    reales
+                                    (2,639 proformas).
+                                </div>
+                            </div>
+
+                            <div class="alert-box"
+                                style="margin:0; background: #fff7ed; border-color: #fed7aa; color: #9a3412;">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                    </path>
+                                </svg>
+                                <div>
+                                    <strong>No hay "reinvención"</strong>
+                                    <br>Replicamos exactamente la lógica existente. Automatizamos sin cambiar la esencia
+                                    del
+                                    proceso.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- ANEXO B: FAQ SUSTENTACIÓN TÉCNICA          -->
+            <!-- ========================================== -->
+
+            <h2
+                style="margin: 4rem 0 1.5rem 0; font-size: 1.5rem; color: var(--primary); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">
+                ANEXO B: FAQ SUSTENTACIÓN TÉCNICA</h2>
+
+            <!-- Q1 -->
+            <div class="faq-item" id="q1">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">01</span>
+                        ¿Cómo garantizan que esto funcionará con Microsoft Access?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">Hemos completado un <strong>análisis técnico exhaustivo</strong> de la base
+                            de
+                            datos <code>Maestro.mdb</code>, documentando las 34 tablas, relaciones y decodificando la
+                            lógica
+                            VBA crítica (cálculos FOB, pesos, etc.).</p>
+
+                        <h3>Estrategia Técnica Probada</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Necesidad</th>
+                                        <th>Tecnología</th>
+                                        <th>¿Abre Access?</th>
+                                        <th>Uso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Leer/Escribir Datos</td>
+                                        <td><strong>pyodbc</strong></td>
+                                        <td>❌ No</td>
+                                        <td>95% del tiempo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Generar PDFs</td>
+                                        <td><strong>win32com</strong></td>
+                                        <td>✅ Sí (invisible)</td>
+                                        <td>5% del tiempo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert-box">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <strong>Sandbox de Pruebas:</strong> Trabajaremos sobre una copia, nunca sobre
+                                producción.
+                                <br><code>C:\SorimexAgente\data\Maestro_sandbox.mdb</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="faq-item" id="q2">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">02</span>
+                        ¿Qué pasa si a mitad del proyecto descubren algo inesperado?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">El proyecto está diseñado en <strong>fases incrementales</strong> para
+                            detectar
+                            problemas temprano.</p>
+
+                        <h3>Estructura de validación</h3>
+                        <ul>
+                            <li><strong>Fase 1 (Semanas 3-13):</strong> Desarrollo y testing exhaustivo (50+ casos de
+                                prueba).</li>
+                            <li><strong>Semana 14 (Punto de Decisión):</strong> Lanzamiento piloto con 1 usuario.</li>
+                        </ul>
+
+                        <div class="code-block">
+                            Si Fase 1 funciona bien (semana 14-15):
+                            ├── ✅ Escalar a más usuarios
+                            └── ✅ Luz verde para Fase 2
+
+                            Si hay problemas en Fase 1:
+                            ├── ⚠️ Los detectamos temprano
+                            ├── 🔧 Tenemos 7+ semanas para ajustar
+                            └── 💰 Pueden pausar sin invertir en Fase 2
+                        </div>
+
+                        <h3>Garantía</h3>
+                        <p>Si tras 2 semanas de uso en producción no están satisfechos, <strong>pueden detener el
+                                proyecto</strong> sin penalización. Riesgo financiero controlado: exposición máxima
+                            ~$10k
+                            (vs $16.5k total).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="faq-item" id="q3">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">03</span>
+                        ¿Cuánto tiempo tomará que el equipo adopte esto?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block"><strong>Tiempo estimado: 2-3 semanas.</strong> El agente usa lenguaje natural
+                            vía
+                            mensajería, reduciendo la curva de aprendizaje a casi cero.</p>
+
+                        <div class="code-block">
+                            <span class="comment"># Interacción Real</span>
+                            Usuario: "Crear proforma para EMPROQUIM, 200 unidades..."
+                            Agente: "✅ Entendido. Confirmo: Cliente EMPROQUIM, 200 un. ¿Correcto?"
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Tiempo</th>
+                                        <th>Nivel de Competencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Día 1</td>
+                                        <td>Capacitación práctica (3 horas)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Semana 1</td>
+                                        <td>Uso guiado (70% autónomos)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Semana 3+</td>
+                                        <td>Uso natural (100% autónomos)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="faq-item" id="q4">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">04</span>
+                        ¿El sistema genera PDFs idénticos a los actuales?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block"><strong>SÍ, 100% idénticos.</strong> No "recreamos" el PDF; automatizamos a
+                            Access para que use sus propios informes existentes.</p>
+
+                        <div class="code-block">
+                            1. Python inserta datos en tabla Access
+                            2. Python ordena a Access: "Imprime Informe 'PROFORMA' a PDF"
+                            3. Access genera el PDF con su motor nativo (mismo logo, mismas fuentes)
+                        </div>
+
+                        <p><strong>Ventaja:</strong> Si Sorimex cambia su logo en Access, el Agente actualiza sus PDFs
+                            automáticamente sin recodificar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="faq-item" id="q5">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">05</span>
+                        ¿Qué pasa si Sorimex migra de Access a otro sistema futuro?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">La arquitectura es <strong>modular</strong>. Solo el 20% del código (Data
+                            Access
+                            Layer) depende de Access. El resto (IA, Lógica de Negocio, Workflows) es reutilizable.</p>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Capa</th>
+                                        <th>Impacto Migración</th>
+                                        <th>Costo Est.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IA y Lógica</td>
+                                        <td>Nulo (0 horas)</td>
+                                        <td>$0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data Access (DAL)</td>
+                                        <td>Reescribir SQL</td>
+                                        <td>$3k - $5k</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="p-block">Rehacer todo costaría $15k+. Migrar costará solo ~$4k. El diseño modular
+                            <strong>protege su inversión</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="faq-item" id="q6">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">06</span>
+                        ¿Por qué confiar en Criterio AI vs Agencias Grandes?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">Transparencia total: No tenemos oficina lujosa, pero tenemos
+                            <strong>expertise
+                                específico y compromiso personal</strong>.
+                        </p>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Factor</th>
+                                        <th>Agencia Grande</th>
+                                        <th>Criterio AI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Precio</td>
+                                        <td>$30k - $50k</td>
+                                        <td><strong>$16.5k</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tiempo</td>
+                                        <td>8-12 meses</td>
+                                        <td><strong>5.5 meses</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trato</td>
+                                        <td>Project Manager</td>
+                                        <td><strong>Directo con Desarrollador</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Riesgo</td>
+                                        <td>Contrato rígido</td>
+                                        <td><strong>Salida temprana posible</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Mi reputación personal está en juego, lo que garantiza un nivel de compromiso ("ir la milla
+                            extra") que un empleado de agencia no tendrá.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="faq-item" id="q7">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">07</span>
+                        ¿Cómo manejan errores y soporte post-lanzamiento?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block"><strong>3 meses de soporte incluidos.</strong> Bugs críticos se resuelven < 4
+                                horas gratis.</p>
+
+                                <h3>Después de 3 meses:</h3>
+                                <ul>
+                                    <li><strong>Opción A:</strong> Soporte mensual ($500/mes) - Paz mental.</li>
+                                    <li><strong>Opción B:</strong> Pago por incidente (bugs críticos siguen siendo
+                                        gratis).
+                                    </li>
+                                    <li><strong>Opción C:</strong> Capacitación IT interna ($600 único) para autonomía.
+                                    </li>
+                                </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="faq-item" id="q8">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">08</span>
+                        ¿Gestión de cambios en el alcance?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">Distinguimos entre <strong>Ajustes Menores</strong> (incluidos) y
+                            <strong>Nuevas
+                                Funcionalidades</strong> (se cotizan).
+                        </p>
+                        <div class="code-block">
+                            Proceso:
+                            1. Solicitud de cambio
+                            2. Evaluación de impacto y cotización
+                            3. Aprobación explicita de Sorimex
+                            4. Implementación
+                        </div>
+                        <p>Nunca habrá una factura sorpresa. Todo costo extra se aprueba antes de trabajar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="faq-item" id="q9">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">09</span>
+                        ¿Manejo de casos especiales y excepciones?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block"><strong>Inteligencia Híbrida:</strong> El agente automatiza lo rutinario
+                            (90%) y
+                            pide ayuda humana en excepciones (10%).</p>
+
+                        <div class="alert-box">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
+                            <div>
+                                <strong>Ejemplo:</strong> Si el FOB > $100k, el agente pausa y dice: "⚠️ Monto alto.
+                                Requiere aprobación manual."
+                            </div>
+                        </div>
+                        <p>Las reglas de aprobación son 100% configurables por Sorimex.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="faq-item" id="q10">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <div class="faq-title">
+                        <span class="faq-number">10</span>
+                        ¿Mantenibilidad del código?
+                    </div>
+                    <svg class="icon-toggle" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="faq-body">
+                    <div class="content">
+                        <p class="p-block">El código está escrito <strong>como si otro desarrollador fuera a trabajar en
+                                él
+                                mañana</strong>, no como "código desechable".</p>
+
+                        <h3>1. Estándares de Calidad</h3>
+                        <ul>
+                            <li><span class="badge-success">Python Limpio</span> Type hits, docstrings, PEP8.</li>
+                            <li><span class="badge-success">Git</span> Control de versiones con historial completo.</li>
+                            <li><span class="badge-success">Tests</span> 100+ tests automatizados (pytest).</li>
+                        </ul>
+
+                        <h3>2. Entregables Técnicos Completos</h3>
+                        <div class="code-block">
+                            Documentación incluida:
+                            1. README.md (Guía de inicio rápida)
+                            2. Diagramas de arquitectura (Flujos completos)
+                            3. Explicación detallada de módulos (dal, logic, agent)
+                            4. Guía de troubleshooting (Solución de problemas comunes)
+                        </div>
+
+                        <h3>3. Sin Vendor Lock-in</h3>
+                        <p>Sorimex es <strong>dueño de todo</strong>: código fuente, base de datos y credenciales. No
+                            hay
+                            dependencias forzadas con Criterio AI después del proyecto. Pueden contratar a cualquier
+                            desarrollador Python en el futuro.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONCLUSION -->
+            <section class="conclusion-section" id="conclusion">
+                <h2>Conclusión y Próximos Pasos</h2>
+                <div class="conclusion-grid">
+                    <div class="risk-card">
+                        <div class="risk-title">Riesgo Técnico</div>
+                        <div class="risk-val">BAJO</div>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:0.5rem">Tecnología probada + Análisis
+                            previo
+                        </div>
+                    </div>
+                    <div class="risk-card">
+                        <div class="risk-title">Riesgo Financiero</div>
+                        <div class="risk-val">CONTROLADO</div>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:0.5rem">Fases + Garantía de Satisfacción
+                        </div>
+                    </div>
+                    <div class="risk-card">
+                        <div class="risk-title">Adopción</div>
+                        <div class="risk-val">ASEGURADA</div>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:0.5rem">Interfaz natural (Chat)</div>
+                    </div>
+                    <div class="risk-card">
+                        <div class="risk-title">Calidad</div>
+                        <div class="risk-val">ALTA</div>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:0.5rem">Testing exhaustivo + Soporte
+                        </div>
+                    </div>
+                </div>
+
+                <p>El proyecto está diseñado para minimizar riesgos y maximizar el valor desde la semana 14. Estamos
+                    preparados para comenzar.</p>
+
+                <div style="margin-top:2rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:2rem">
+                    <strong>Criterio AI</strong><br>
+                    Hernando Gaitán Díaz<br><br>
+                    📧 Email: hernandogaitandiaz@gmail.com <br>
+                    📱 WhatsApp: +573208379165
+                </div>
+            </section>
+
+        </main>
+
+        <script>
+            // Smooth scroll handling for nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    // Open the FAQ item if it's closed (except conclusion)
+                    if (targetElement.classList.contains('faq-item')) {
+                        if (!targetElement.classList.contains('open')) {
+                            targetElement.classList.add('open');
+                        }
+                    }
+
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+
+                    // Update active state
+                    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // FAQ Toggle Logic
+            function toggleFaq(header) {
+                const item = header.parentElement;
+                const wasOpen = item.classList.contains('open');
+
+                // Optional: Close others
+                // document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+                if (!wasOpen) {
+                    item.classList.add('open');
+                } else {
+                    item.classList.remove('open');
+                }
+            }
+
+            // Highlight active nav based on scroll
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const sections = document.querySelectorAll('.faq-item, .conclusion-section, .hero');
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= sectionTop - 300) {
+                        if (section.getAttribute('id')) {
+                            current = '#' + section.getAttribute('id');
+                        }
+                    }
+                });
+
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        </script>
+</body>
+
+</html>

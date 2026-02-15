@@ -1,596 +1,992 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cronograma Gantt - Agente IA Sorimex</title>
+    <title>Propuesta Comercial | Agente IA Sorimex</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px 20px;
-            min-height: 100vh;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
         }
-        
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
+
+        /* HEADER & HERO */
+        header {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px 50px;
-            color: white;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            font-weight: 400;
-        }
-        
-        .stats {
-            display: flex;
-            gap: 30px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .stat {
-            background: rgba(255,255,255,0.15);
-            padding: 15px 25px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat-value {
-            font-size: 2em;
-            font-weight: 700;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 0.85em;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-        
-        .gantt-container {
-            padding: 50px;
-            background: #fafafa;
-        }
-        
-        .gantt-wrapper {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        
-        .gantt-header {
-            display: grid;
-            grid-template-columns: 280px repeat(22, 1fr);
-            gap: 0;
-            margin-bottom: 5px;
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            background: white;
-            z-index: 10;
-            padding-bottom: 15px;
+            z-index: 100;
+            padding: 1rem 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
-        
-        .week-header {
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.75em;
-            color: #6b7280;
-            padding: 8px 4px;
-            border-right: 1px solid #e5e7eb;
-        }
-        
-        .week-header:last-child {
-            border-right: none;
-        }
-        
-        .week-number {
-            display: block;
-            font-size: 1.1em;
-            color: #1f2937;
-            margin-bottom: 3px;
-        }
-        
-        .month-label {
-            display: block;
-            font-size: 0.85em;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .gantt-row {
-            display: grid;
-            grid-template-columns: 280px repeat(22, 1fr);
-            gap: 0;
-            margin-bottom: 15px;
-            align-items: center;
-            min-height: 60px;
-        }
-        
-        .task-label {
-            padding: 15px 20px;
-            background: #f9fafb;
-            border-radius: 8px 0 0 8px;
-            border-left: 5px solid #3b82f6;
-            height: 100%;
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .task-name {
-            font-weight: 600;
-            color: #1f2937;
-            font-size: 0.95em;
-            margin-bottom: 3px;
-        }
-        
-        .task-meta {
-            font-size: 0.8em;
-            color: #6b7280;
-        }
-        
-        .gantt-grid {
-            display: contents;
-        }
-        
-        .grid-cell {
-            border-right: 1px solid #f3f4f6;
-            border-bottom: 1px solid #f3f4f6;
-            min-height: 60px;
-        }
-        
-        .grid-cell:last-child {
-            border-right: none;
-        }
-        
-        .bar {
-            position: relative;
-            height: 40px;
-            border-radius: 6px;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+        }
+
+        .brand {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .btn-cta {
+            background: var(--primary);
             color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
             font-weight: 600;
-            font-size: 0.8em;
-            margin: 10px 2px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            transition: all 0.2s ease;
-            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
         }
-        
-        .bar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+
+        .btn-cta:hover {
+            background: var(--primary-dark);
         }
-        
-        .bar-content {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1.5rem;
+            background: linear-gradient(180deg, white 0%, var(--bg-body) 100%);
         }
-        
-        /* Estilos por tipo de fase */
-        .bar-fase0 {
-            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
-        
-        .bar-fase1 {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: var(--text-main);
         }
-        
-        .bar-fase1-test {
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
-        
-        .bar-fase2 {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+
+        /* CONTENT CONTAINER */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
         }
-        
-        .bar-fase2-test {
-            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+
+        /* TEXT STYLES */
+        .subsection-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        
-        .bar-cierre {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+
+        .p-block {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
         }
-        
-        .bar-milestone {
-            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+
+        /* LISTS */
+        .feature-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
             position: relative;
         }
-        
-        .bar-milestone::before {
-            content: "🚀";
+
+        .feature-list li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
             position: absolute;
-            left: -30px;
-            font-size: 1.8em;
-            animation: bounce 2s infinite;
+            left: 0;
         }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+
+        .step-list {
+            counter-reset: step;
+            list-style: none;
         }
-        
-        .legend {
-            display: flex;
-            gap: 25px;
-            margin-top: 40px;
-            padding: 25px;
-            background: white;
-            border-radius: 12px;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
+        .step-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
         }
-        
-        .legend-item {
+
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            background: var(--secondary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 20px;
+            font-weight: 700;
+        }
+
+        /* BADGES */
+        .badge-warning {
+            display: inline-block;
+            background: #fffbeb;
+            color: #b45309;
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .badge-info {
+            display: inline-block;
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .alert-box {
+            padding: 1rem;
+            border-radius: 8px;
+            background: #fffbea;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            margin: 1rem 0;
+        }
+
+        /* CARDS & SECTIONS */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
         }
-        
-        .legend-box {
-            width: 35px;
-            height: 25px;
-            border-radius: 5px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
         }
-        
-        .legend-text {
-            font-size: 0.9em;
-            color: #374151;
+
+        /* SUMMARY STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
             font-weight: 500;
         }
-        
-        .milestones-section {
-            margin-top: 40px;
-            padding: 30px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .milestones-section h3 {
-            color: #1f2937;
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .milestone-grid {
+
+        /* COMPARISON TABLE */
+        .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
         }
-        
-        .milestone-card {
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #ec4899;
-            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        
-        .milestone-card.critical {
-            border-left-color: #ef4444;
-            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-        }
-        
-        .milestone-week {
+
+        .process-title {
             font-weight: 700;
-            color: #be185d;
-            font-size: 1.1em;
-            margin-bottom: 8px;
+            margin-bottom: 1rem;
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
         }
-        
-        .milestone-card.critical .milestone-week {
-            color: #dc2626;
+
+        .process-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.95rem;
         }
-        
-        .milestone-desc {
-            color: #4b5563;
-            font-size: 0.9em;
-            line-height: 1.5;
+
+        .icon-bad {
+            color: var(--warning);
+            min-width: 1.25rem;
         }
-        
+
+        .icon-good {
+            color: var(--success);
+            min-width: 1.25rem;
+        }
+
+        /* INVESTMENT TABLE */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing-table th {
+            background: #f8fafc;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .price-total {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* CONTACT FOOTER */
         .footer {
-            padding: 30px 50px;
-            background: #f9fafb;
-            border-top: 1px solid #e5e7eb;
+            background: #1e293b;
+            color: white;
+            padding: 4rem 1.5rem;
+            margin-top: 4rem;
             text-align: center;
-            color: #6b7280;
-            font-size: 0.9em;
         }
-        
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            
-            .container {
-                box-shadow: none;
-            }
-            
-            .bar-milestone::before {
-                animation: none;
-            }
+
+        .footer h2 {
+            color: white;
+            margin-bottom: 1rem;
         }
-        
-        /* Separadores de mes */
-        .month-separator {
-            background: linear-gradient(to bottom, transparent 0%, #e5e7eb 50%, transparent 100%) !important;
-            width: 2px !important;
-            margin: 0 -1px;
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* CHAT SIMULATION */
+        .chat-sim {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .chat-msg {
+            margin-bottom: 0.75rem;
+        }
+
+        .chat-user {
+            color: var(--text-muted);
+        }
+
+        .chat-bot {
+            color: var(--primary);
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>📅 Cronograma Proyecto Agente IA</h1>
-            <p>Sorimex - Automatización Proformas y Pedidos</p>
-            <div class="stats">
-                <div class="stat">
-                    <span class="stat-value">22</span>
-                    <span class="stat-label">Semanas</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">5.5</span>
-                    <span class="stat-label">Meses</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">2</span>
-                    <span class="stat-label">Lanzamientos en Producción</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">7</span>
-                    <span class="stat-label">Hitos Críticos</span>
-                </div>
-            </div>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand" style="text-decoration: none;">CRITERIO AI</a>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Propuesta</a>
+                <a href="cronograma.html" class="nav-link">Cronograma</a>
+                <a href="anexos.html" class="nav-link">Sustentación Técnica</a>
+            </nav>
         </div>
-        
-        <div class="gantt-container">
-            <div class="gantt-wrapper">
-                <!-- Header con semanas -->
-                <div class="gantt-header">
-                    <div></div>
-                    <!-- Mes 1 -->
-                    <div class="week-header"><span class="week-number">S1</span><span class="month-label">MAR</span></div>
-                    <div class="week-header"><span class="week-number">S2</span><span class="month-label">MAR</span></div>
-                    <div class="week-header"><span class="week-number">S3</span><span class="month-label">MAR</span></div>
-                    <div class="week-header"><span class="week-number">S4</span><span class="month-label">MAR</span></div>
-                    <!-- Mes 2 -->
-                    <div class="week-header" style="border-left: 2px solid #e5e7eb;"><span class="week-number">S5</span><span class="month-label">ABR</span></div>
-                    <div class="week-header"><span class="week-number">S6</span><span class="month-label">ABR</span></div>
-                    <div class="week-header"><span class="week-number">S7</span><span class="month-label">ABR</span></div>
-                    <div class="week-header"><span class="week-number">S8</span><span class="month-label">ABR</span></div>
-                    <!-- Mes 3 -->
-                    <div class="week-header" style="border-left: 2px solid #e5e7eb;"><span class="week-number">S9</span><span class="month-label">MAY</span></div>
-                    <div class="week-header"><span class="week-number">S10</span><span class="month-label">MAY</span></div>
-                    <div class="week-header"><span class="week-number">S11</span><span class="month-label">MAY</span></div>
-                    <div class="week-header"><span class="week-number">S12</span><span class="month-label">MAY</span></div>
-                    <!-- Mes 4 -->
-                    <div class="week-header" style="border-left: 2px solid #e5e7eb;"><span class="week-number">S13</span><span class="month-label">JUN</span></div>
-                    <div class="week-header"><span class="week-number">S14</span><span class="month-label">JUN</span></div>
-                    <div class="week-header"><span class="week-number">S15</span><span class="month-label">JUN</span></div>
-                    <div class="week-header"><span class="week-number">S16</span><span class="month-label">JUN</span></div>
-                    <!-- Mes 5 -->
-                    <div class="week-header" style="border-left: 2px solid #e5e7eb;"><span class="week-number">S17</span><span class="month-label">JUL</span></div>
-                    <div class="week-header"><span class="week-number">S18</span><span class="month-label">JUL</span></div>
-                    <div class="week-header"><span class="week-number">S19</span><span class="month-label">JUL</span></div>
-                    <div class="week-header"><span class="week-number">S20</span><span class="month-label">JUL</span></div>
-                    <!-- Mes 6 -->
-                    <div class="week-header" style="border-left: 2px solid #e5e7eb;"><span class="week-number">S21</span><span class="month-label">AGO</span></div>
-                    <div class="week-header"><span class="week-number">S22</span><span class="month-label">AGO</span></div>
-                </div>
-                
-                <!-- Fase 0 -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #f59e0b;">
-                        <div class="task-name">FASE 0: Pre-requisitos</div>
-                        <div class="task-meta">Setup e infraestructura • $1,125</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 2;">
-                        <div class="bar bar-fase0">
-                            <div class="bar-content">2 semanas</div>
-                        </div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 20;"></div>
-                </div>
-                
-                <!-- Fase 1 Desarrollo -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #3b82f6;">
-                        <div class="task-name">FASE 1: Desarrollo Proformas</div>
-                        <div class="task-meta">DAL, PDF, Carpetas, Agente, Email • $8,595</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 2;"></div>
-                    <div class="grid-cell" style="grid-column: span 10;">
-                        <div class="bar bar-fase1">
-                            <div class="bar-content">10 semanas</div>
-                        </div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 10;"></div>
-                </div>
-                
-                <!-- Testing Fase 1 -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #1e40af;">
-                        <div class="task-name">Testing Exhaustivo Fase 1</div>
-                        <div class="task-meta">Validación sandbox • 50+ casos prueba</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 12;"></div>
-                    <div class="grid-cell" style="grid-column: span 1;">
-                        <div class="bar bar-fase1-test">Test</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 9;"></div>
-                </div>
-                
-                <!-- Producción Fase 1 - HITO -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #ec4899; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);">
-                        <div class="task-name">🚀 PRODUCCIÓN FASE 1</div>
-                        <div class="task-meta" style="color: #be185d; font-weight: 600;">✨ VICTORIA TEMPRANA - Sistema funcionando</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 13;"></div>
-                    <div class="grid-cell" style="grid-column: span 2;">
-                        <div class="bar bar-milestone">
-                            <div class="bar-content">Semana 14-15</div>
-                        </div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 7;"></div>
-                </div>
-                
-                <!-- Fase 2 Desarrollo -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #10b981;">
-                        <div class="task-name">FASE 2: Desarrollo Pedidos</div>
-                        <div class="task-meta">Lógica pedidos, PDF, Workflows • $3,825</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 15;"></div>
-                    <div class="grid-cell" style="grid-column: span 5;">
-                        <div class="bar bar-fase2">
-                            <div class="bar-content">5 semanas</div>
-                        </div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 2;"></div>
-                </div>
-                
-                <!-- Testing Fase 2 -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #047857;">
-                        <div class="task-name">Testing Fase 2</div>
-                        <div class="task-meta">Validación pedidos • Integración completa</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 19;"></div>
-                    <div class="grid-cell" style="grid-column: span 1;">
-                        <div class="bar bar-fase2-test">Test</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 2;"></div>
-                </div>
-                
-                <!-- Producción Fase 2 - HITO -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #ec4899; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);">
-                        <div class="task-name">🚀 PRODUCCIÓN FASE 2</div>
-                        <div class="task-meta" style="color: #be185d; font-weight: 600;">✨ SISTEMA COMPLETO - Proformas + Pedidos</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 20;"></div>
-                    <div class="grid-cell" style="grid-column: span 2;">
-                        <div class="bar bar-milestone">
-                            <div class="bar-content">Semana 21-22</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Cierre -->
-                <div class="gantt-row">
-                    <div class="task-label" style="border-left-color: #8b5cf6;">
-                        <div class="task-name">CIERRE: Documentación Final</div>
-                        <div class="task-meta">Docs, videos, capacitación • $495</div>
-                    </div>
-                    <div class="grid-cell" style="grid-column: span 21;"></div>
-                    <div class="grid-cell" style="grid-column: span 1;">
-                        <div class="bar bar-cierre">Final</div>
-                    </div>
-                </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <span class="badge">PROPUESTA COMERCIAL v1.0</span>
+            <h1>Agente IA para Automatización<br>de Procesos Sorimex</h1>
+            <p>Reducción del 87% en tiempo operativo, cero errores en cálculos y liberación de 15 horas mensuales del
+                equipo comercial.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem;">
+                <a href="#inversion" class="btn-cta" style="padding: 0.75rem 1.5rem; font-size: 1rem;">Ver Inversión</a>
+                <a href="anexos.html" class="nav-link"
+                    style="border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: 6px; background: white;">Ver
+                    Análisis Técnico</a>
             </div>
-            
-            <!-- Leyenda -->
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-box bar-fase0"></div>
-                    <div class="legend-text">Fase 0: Setup</div>
+        </section>
+
+        <div class="container">
+            <!-- 1. RESUMEN EJECUTIVO -->
+            <section id="resumen">
+                <h2 class="section-title">1. Resumen Ejecutivo</h2>
+                <div class="card">
+                    <p class="p-block">
+                        Sorimex invierte actualmente <strong>~18.2 horas mensuales</strong> en tareas manuales
+                        relacionadas con la creación de proformas y pedidos. Este tiempo operativo podría estar dedicado
+                        a actividades comerciales de mayor valor.
+                    </p>
+                    <p class="p-block">
+                        <strong>Proponemos desarrollar un agente conversacional con Inteligencia Artificial</strong> que
+                        automatice el proceso completo: desde la solicitud verbal hasta el email enviado con PDF y
+                        documentación organizada.
+                    </p>
+
+                    <h3 class="subsection-title">Beneficios Clave</h3>
+                    <ul class="feature-list">
+                        <li><strong>Reducción del 87% en tiempo</strong> por transacción (15 min → 2 min)</li>
+                        <li><strong>Cero errores</strong> en cálculos de FOB, peso bruto y embalajes</li>
+                        <li><strong>Respuesta instantánea</strong> a solicitudes de clientes</li>
+                        <li><strong>Liberación de 15+ horas/mes</strong> del equipo para actividades comerciales</li>
+                        <li><strong>Escalabilidad</strong> sin necesidad de contratar personal adicional</li>
+                    </ul>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">Inversión y Retorno</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <td><strong>Inversión Total</strong></td>
+                                <td>USD $16,500</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ahorro Anual Estimado</strong></td>
+                                <td>USD $8,000 - $12,000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Payback</strong></td>
+                                <td>1.5 - 2.3 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Duración Proyecto</strong></td>
+                                <td>5.5 meses</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">Enfoque de Implementación</h3>
+                    <ul class="feature-list">
+                        <li>✅ <strong>Fase 1 (3 meses):</strong> Automatización de proformas → Victoria temprana</li>
+                        <li>✅ <strong>Fase 2 (2 meses):</strong> Automatización de pedidos → Sistema completo</li>
+                        <li>✅ <strong>Producción incremental:</strong> Validación continua con usuarios reales</li>
+                    </ul>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-box bar-fase1"></div>
-                    <div class="legend-text">Fase 1: Proformas</div>
+            </section>
+
+            <!-- 2. SITUACIÓN ACTUAL -->
+            <section id="situacion">
+                <h2 class="section-title">2. Situación Actual</h2>
+
+                <div class="card">
+                    <h3 class="subsection-title">Proceso Manual de Proformas</h3>
+                    <p class="p-block"><strong>Pasos actuales:</strong></p>
+                    <ol class="step-list" style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li>Recepción de solicitud (email/teléfono/reunión)</li>
+                        <li>Ingreso manual de datos en formulario Access</li>
+                        <li>Validación de cálculos (FOB, peso bruto, embalajes)</li>
+                        <li>Generación manual de PDF (Access no lo hace nativamente)</li>
+                        <li>Creación de estructura de carpetas según protocolo Sorimex</li>
+                        <li>Armado de email con plantilla</li>
+                        <li>Envío de documentación</li>
+                    </ol>
+                    <p class="badge-warning"><strong>Tiempo promedio:</strong> 15 minutos por proforma</p>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">Costo Actual</h3>
+                    <div class="comparison-grid">
+                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                            <strong>Con 50 proformas/mes:</strong>
+                            <ul style="margin-top: 0.5rem; list-style: none;">
+                                <li>• Tiempo total: <strong>12.5 horas/mes</strong></li>
+                                <li>• Costo estimado: <strong>$250 USD/mes</strong></li>
+                            </ul>
+                        </div>
+                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                            <strong>Con 40 pedidos/mes:</strong>
+                            <ul style="margin-top: 0.5rem; list-style: none;">
+                                <li>• Tiempo total: <strong>6.7 horas/mes</strong></li>
+                                <li>• Costo estimado: <strong>$134 USD/mes</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center; font-weight: 700; color: var(--danger);">
+                        Costo anual operativo: ~$4,600 USD (solo tiempo directo)
+                    </div>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">Costos Ocultos</h3>
+                    <p class="p-block">Más allá del tiempo directo, el proceso manual genera:</p>
+                    <ul class="feature-list">
+                        <li>⏰ Retrasos en respuesta a clientes (horas a días)</li>
+                        <li>❌ Errores humanos en cálculos (2-5% incidencia estimada)</li>
+                        <li>😫 Frustración del equipo con tareas repetitivas</li>
+                        <li>📉 Imposibilidad de escalar sin contratar más personal</li>
+                        <li>💰 Oportunidades comerciales perdidas</li>
+                    </ul>
+                    <div class="alert-box" style="margin-top: 1.5rem;">
+                        <strong>Costo de oportunidad estimado:</strong> $4,000 - $8,000 USD/año adicionales
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-box bar-fase2"></div>
-                    <div class="legend-text">Fase 2: Pedidos</div>
+            </section>
+
+            <!-- SITUACION ACTUAL VS FUTURA -->
+            <section id="solucion">
+                <h2 class="section-title">Del Proceso Manual a la Automatización</h2>
+                <div class="comparison-grid">
+                    <div class="card" style="border-left: 4px solid var(--warning);">
+                        <span class="process-title" style="color: var(--warning);">Situación Actual</span>
+                        <ul class="process-list" style="list-style: none;">
+                            <li><span class="icon-bad">⏰</span> 15 minutos por proforma</li>
+                            <li><span class="icon-bad">⌨️</span> Ingreso manual en Access</li>
+                            <li><span class="icon-bad">⚠️</span> Validación manual de cálculos</li>
+                            <li><span class="icon-bad">📄</span> Generación manual de PDF</li>
+                            <li><span class="icon-bad">📧</span> Redacción manual de emails</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-left: 44px solid var(--success);">
+                        <span class="process-title" style="color: var(--success);">Solución Propuesta</span>
+                        <ul class="process-list" style="list-style: none;">
+                            <li><span class="icon-good">⚡</span> 2 minutos por transacción</li>
+                            <li><span class="icon-good">💬</span> Instrucción por Chat (Telegram)</li>
+                            <li><span class="icon-good">🤖</span> Cálculos automáticos (0 error)</li>
+                            <li><span class="icon-good">📎</span> PDF y Carpetas automáticos</li>
+                            <li><span class="icon-good">📨</span> Email listo para enviar</li>
+                            <h2 class="section-title">3. Solución Propuesta</h2>
+
+                            <div class="card">
+                                <h3 class="subsection-title">Visión General</h3>
+                                <p class="p-block">Un <strong>agente conversacional con Inteligencia Artificial</strong>
+                                    que permite crear proformas y pedidos mediante instrucciones en lenguaje natural:
+                                </p>
+
+                                <div class="chat-sim">
+                                    <div class="chat-msg">
+                                        <span class="chat-user">Usuario (vía Telegram):</span><br>
+                                        "Crear proforma para EMPROQUIM, 200 unidades de EM-GR-703000, CIF vía aérea,
+                                        entrega Santiago"
+                                    </div>
+                                    <div class="chat-sep" style="text-align:center; color:#ccc; margin: 1rem 0;">↓ (2
+                                        minutos)</div>
+                                    <div class="chat-msg">
+                                        <span class="chat-bot">Agente responde:</span><br>
+                                        "✅ Proforma 19850 creada<br>
+                                        📎 PDF: Proforma_19850.pdf<br>
+                                        📧 Email enviado para tu revisión<br>
+                                        📁 Guardado en: 2026/02/PROCAPS/Proforma_19850/"
+                                    </div>
+                                </div>
+
+                                <h3 class="subsection-title" style="margin-top: 2rem;">Arquitectura Técnica</h3>
+                                <p class="p-block"><strong>Componentes principales:</strong></p>
+                                <ol class="step-list" style="margin-left: 1.5rem;">
+                                    <li><strong>Interfaz Conversacional:</strong> Telegram (MVP) - familiar y accesible.
+                                        Extensible a WhatsApp Business.</li>
+                                    <li><strong>Motor de Inteligencia Artificial:</strong> Claude 4 Sonnet (Anthropic),
+                                        RAG para catálogos, comprensión natural.</li>
+                                    <li><strong>Integración con Access:</strong> Lectura/escritura directa (sin abrir
+                                        Access). Generación de PDFs usando informes existentes.</li>
+                                    <li><strong>Automatización de Workflows:</strong> N8N (open-source). Gestión de
+                                        carpetas y emails.</li>
+                                </ol>
+
+                                <h3 class="subsection-title" style="margin-top: 2rem;">Interacción con Microsoft Access
+                                </h3>
+                                <p class="p-block">Python interactúa con Access de forma especializada:</p>
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Componente Access</th>
+                                                <th>Método</th>
+                                                <th>Requiere Abrir Access</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Tablas</strong></td>
+                                                <td>pyodbc (SQL directo)</td>
+                                                <td>❌ No</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Consultas</strong></td>
+                                                <td>pyodbc (SQL propio)</td>
+                                                <td>❌ No</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Formularios</strong></td>
+                                                <td>Lógica reimplementada en Python</td>
+                                                <td>❌ No usa</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Informes</strong></td>
+                                                <td>win32com (exporta a PDF)</td>
+                                                <td>✅ Sí (invisible)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ul class="feature-list" style="margin-top: 1rem;">
+                                    <li>✅ PDFs 100% idénticos a los actuales</li>
+                                    <li>✅ Mantiene toda la lógica de negocio</li>
+                                    <li>✅ Cero disrupción del sistema actual</li>
+                                </ul>
+
+                                <h3 class="subsection-title" style="margin-top: 2rem;">Flujo Operativo (Nivel 1 -
+                                    Asistente Supervisado)</h3>
+                                <div
+                                    style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; text-align: center; font-family: monospace;">
+                                    Funcionario → Instrucción (Telegram)<br>
+                                    ↓<br>
+                                    Agente → Crea proforma/pedido + PDF + Carpetas<br>
+                                    ↓<br>
+                                    Agente → Envía EMAIL AL FUNCIONARIO (no al cliente)<br>
+                                    ↓<br>
+                                    Funcionario → Revisa PDF adjunto<br>
+                                    ↓<br>
+                                    Funcionario → Reply/Forward al cliente
+                                </div>
+                                <p class="p-block" style="margin-top: 1rem;">
+                                    <strong>Beneficios:</strong> Control total del funcionario, validación humana
+                                    obligatoria, y construcción gradual de confianza.
+                                </p>
+                            </div>
+            </section>
+
+            <!-- 4. ROADMAP DE IMPLEMENTACIÓN -->
+            <section id="roadmap">
+                <h2 class="section-title">4. Roadmap de Implementación</h2>
+
+                <div class="card">
+                    <h3 class="subsection-title">FASE 0: Pre-requisitos y Setup (Semanas 1-2)</h3>
+                    <p class="p-block"><strong>Responsabilidad Sorimex:</strong> Acceso servidor, email agente,
+                        protocolo carpetas, backup.</p>
+                    <p class="p-block"><strong>Responsabilidad Criterio AI:</strong> Setup entorno, análisis VBA,
+                        arquitectura, repo Git.</p>
+                    <p class="badge-info">Inversión: $1,125 USD</p>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">FASE 1: Agente + Proformas (Semanas 3-14)
+                    </h3>
+                    <ul class="feature-list">
+                        <li><strong>Data Access Layer (DAL):</strong> Lectura/escritura Access, cálculos FOB.</li>
+                        <li><strong>Generación PDF:</strong> Exportación informes, nomenclatura.</li>
+                        <li><strong>Sistema de Carpetas:</strong> Estructura automática.</li>
+                        <li><strong>Agente AI Core:</strong> Prompts Claude, RAG, NLP.</li>
+                        <li><strong>Módulo Email:</strong> Plantillas profesionales.</li>
+                        <li><strong>Workflows N8N:</strong> Integración end-to-end.</li>
+                        <li><strong>Dashboard Supervisión:</strong> Vista de conversaciones.</li>
+                    </ul>
+                    <div class="alert-box" style="margin-top: 1rem;">
+                        <strong>🚀 PRODUCCIÓN FASE 1 (Semanas 14-15):</strong> Lanzamiento gradual. Victoria Temprana.
+                    </div>
+                    <p class="badge-info">Inversión: $8,595 USD</p>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">FASE 2: Generación de Pedidos (Semanas 16-22)
+                    </h3>
+                    <ul class="feature-list">
+                        <li><strong>Lógica de Pedidos:</strong> Generación PEDNUM, conversión Proforma->Pedido.</li>
+                        <li><strong>PDF Pedidos + Workflows:</strong> Exportación y plantillas proveedores.</li>
+                        <li><strong>Refinamiento:</strong> Ajustes por feedback Fase 1.</li>
+                    </ul>
+                    <div class="alert-box" style="margin-top: 1rem;">
+                        <strong>🚀 PRODUCCIÓN FASE 2 (Semanas 21-22):</strong> Sistema Completo en operación.
+                    </div>
+                    <p class="badge-info">Inversión: $3,825 USD</p>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">CIERRE: Documentación y Entrega (Semana 22)
+                    </h3>
+                    <p class="p-block">Manual de usuario, documentación técnica, videos tutoriales y sesión de cierre.
+                    </p>
+                    <p class="badge-info">Inversión: $495 USD</p>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-box bar-cierre"></div>
-                    <div class="legend-text">Cierre</div>
+            </section>
+
+            <!-- 5. CRONOGRAMA VISUAL -->
+            <section id="cronograma-sec">
+                <h2 class="section-title">5. Cronograma Visual</h2>
+                <div class="card" style="text-align: center;">
+                    <p class="p-block">El proyecto tiene una duración total estimada de <strong>22 semanas (5.5
+                            meses)</strong>.</p>
+                    <a href="cronograma.html" class="btn-cta" style="display: inline-block; margin-top: 1rem;">Ver
+                        Cronograma Detallado Gantt</a>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-box bar-milestone"></div>
-                    <div class="legend-text">🚀 Lanzamientos</div>
+            </section>
+
+            <!-- 6. INVERSIÓN -->
+            <section id="inversion">
+                <h2 class="section-title">6. Inversión</h2>
+                <div class="card">
+                    <h3 class="subsection-title">Desglose por Fase</h3>
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Fase</th>
+                                <th>Horas</th>
+                                <th>Inversión</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Fase 0:</strong> Pre-requisitos</td>
+                                <td>25h</td>
+                                <td>$1,125</td>
+                                <td>7%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fase 1:</strong> Agente + Proformas</td>
+                                <td>191h</td>
+                                <td>$8,595</td>
+                                <td>52%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fase 2:</strong> Pedidos</td>
+                                <td>85h</td>
+                                <td>$3,825</td>
+                                <td>23%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cierre:</strong> Documentación</td>
+                                <td>11h</td>
+                                <td>$495</td>
+                                <td>3%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contingencia:</strong> Buffer</td>
+                                <td>47h</td>
+                                <td>$2,460</td>
+                                <td>15%</td>
+                            </tr>
+                            <tr style="background: #f8fafc; border-top: 2px solid var(--primary);">
+                                <td style="font-weight: 800;">TOTAL</td>
+                                <td style="font-weight: 800;">359h</td>
+                                <td class="price-total">$16,500</td>
+                                <td style="font-weight: 800;">100%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">Estructura de Pago (Hitos)</h3>
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Hito</th>
+                                <th>Monto</th>
+                                <th>%</th>
+                                <th>Cuándo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#1</strong> Inicio</td>
+                                <td>$1,650</td>
+                                <td>10%</td>
+                                <td>Firma de contrato</td>
+                            </tr>
+                            <tr>
+                                <td><strong>#2</strong> Fase 1 (Sandbox)</td>
+                                <td>$7,425</td>
+                                <td>45%</td>
+                                <td>Semana 13 (aprobación)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>#3</strong> Fase 2</td>
+                                <td>$4,125</td>
+                                <td>25%</td>
+                                <td>Semana 20 (aprobación)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>#4</strong> Cierre</td>
+                                <td>$3,300</td>
+                                <td>20%</td>
+                                <td>Semana 22 (aceptación)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="color: var(--success); margin-bottom: 0.5rem;">✅ Incluye</h4>
+                            <ul class="feature-list" style="font-size: 0.9rem;">
+                                <li>359 horas desarrollo</li>
+                                <li>Sistema completo (proformas + pedidos)</li>
+                                <li>3 meses soporte post-lanzamiento</li>
+                                <li>Documentación y Videos</li>
+                                <li>Capacitación equipo</li>
+                                <li>Dashboard de supervisión</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--danger); margin-bottom: 0.5rem;">❌ No Incluye</h4>
+                            <ul class="feature-list" style="font-size: 0.9rem;">
+                                <li>Migración PostgreSQL (Fase 4 opcional)</li>
+                                <li>WhatsApp Business (Fase 4 opcional)</li>
+                                <li>Funcionalidades fuera de alcance</li>
+                                <li>Soporte extendido (>3 meses)</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Hitos Críticos -->
-            <div class="milestones-section">
-                <h3>🎯 Hitos Críticos del Proyecto</h3>
-                <div class="milestone-grid">
-                    <div class="milestone-card">
-                        <div class="milestone-week">Semana 2</div>
-                        <div class="milestone-desc">Setup completo • Infraestructura lista • Accesos configurados</div>
+            </section>
+
+            <!-- 7. GARANTÍA -->
+            <section id="garantia">
+                <h2 class="section-title">7. Garantía y Reducción de Riesgo</h2>
+                <div class="card">
+                    <h3 class="subsection-title">Garantía de Satisfacción</h3>
+                    <div class="alert-box" style="background: #ecfdf5; border-color: #10b981;">
+                        <p><strong>Si después de 2 semanas de usar Fase 1 en producción (Semana 16) no están satisfechos
+                                con los resultados, pueden detener el proyecto.</strong></p>
                     </div>
-                    <div class="milestone-card">
-                        <div class="milestone-week">Semana 8</div>
-                        <div class="milestone-desc">Review 50% Fase 1 • DAL + PDF + Carpetas funcionando</div>
+                    <ul class="feature-list" style="margin-top: 1rem;">
+                        <li>Solo habrán invertido: Fase 0 + Fase 1 = $9,720 USD</li>
+                        <li>No hay obligación de continuar con Fase 2</li>
+                        <li>Se entrega todo el código desarrollado hasta ese momento</li>
+                    </ul>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">Enfoque de Bajo Riesgo</h3>
+                    <p class="p-block"><strong>Nuestro enfoque (Validación Continua):</strong></p>
+                    <ul style="list-style: none; padding-left: 1rem; border-left: 3px solid var(--primary);">
+                        <li>├── $1,650 → Fase 0 → Setup validado</li>
+                        <li>├── $7,425 → Fase 1 → Sistema funcionando (semana 14) <strong>[PUNTO DE DECISIÓN]</strong>
+                        </li>
+                        <li>├── $4,125 → Fase 2 → Solo si Fase 1 cumplió expectativas</li>
+                        <li>└── $3,300 → Cierre → Sistema completo operando</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 8. ROI -->
+            <section id="roi">
+                <h2 class="section-title">8. Retorno de Inversión (ROI)</h2>
+                <div class="card">
+                    <h3 class="subsection-title">Ahorro Directo Anual</h3>
+                    <p class="p-block">
+                        <strong>Tiempo ahorrado:</strong> 16.1 horas/mes = 193 horas/año<br>
+                        <strong>Ahorro monetario:</strong> 193h x $20/h = <strong>$3,864/año</strong>
+                    </p>
+
+                    <h3 class="subsection-title" style="margin-top: 1.5rem;">Cálculo de Payback</h3>
+                    <div class="comparison-grid">
+                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                            <strong>Escenario Conservador</strong>
+                            <br>Ahorro: $8,000 USD/año
+                            <br><strong>Payback: 2.1 años</strong>
+                        </div>
+                        <div
+                            style="background: #f1f5f9; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--success);">
+                            <strong>Escenario Optimista</strong>
+                            <br>Ahorro: $12,000 USD/año
+                            <br><strong>Payback: 1.4 años</strong>
+                        </div>
                     </div>
-                    <div class="milestone-card">
-                        <div class="milestone-week">Semana 13</div>
-                        <div class="milestone-desc">Fase 1 aprobada en testing • 50+ proformas validadas</div>
+                    <p class="p-block" style="margin-top: 1rem; font-style: italic;">
+                        Beneficios adicionales: Respuesta instantánea, Cero errores, Escalabilidad, Satisfacción del
+                        equipo.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 9. COMPARATIVA -->
+            <section id="comparativa">
+                <h2 class="section-title">9. Comparativa con Alternativas</h2>
+                <div class="comparison-grid">
+                    <div class="card" style="opacity: 0.8;">
+                        <strong>Opción A: Manual</strong>
+                        <p style="color: var(--danger);">✗ Costo anual: $4,600 - $8,000</p>
+                        <p style="color: var(--danger);">✗ No escalable, errores humanos</p>
                     </div>
-                    <div class="milestone-card critical">
-                        <div class="milestone-week">⭐ Semana 14 - CRÍTICO</div>
-                        <div class="milestone-desc">PRIMERA PRODUCCIÓN • Sistema funcionando con usuarios reales • PUNTO DE DECISIÓN</div>
-                    </div>
-                    <div class="milestone-card">
-                        <div class="milestone-week">Semana 16</div>
-                        <div class="milestone-desc">Todo el equipo usando Fase 1 • Feedback completo recopilado</div>
-                    </div>
-                    <div class="milestone-card critical">
-                        <div class="milestone-week">⭐ Semana 21</div>
-                        <div class="milestone-desc">SISTEMA COMPLETO • Proformas + Pedidos en producción</div>
-                    </div>
-                    <div class="milestone-card">
-                        <div class="milestone-week">Semana 22</div>
-                        <div class="milestone-desc">Entrega final • Documentación + Capacitación + Cierre</div>
+                    <div class="card" style="opacity: 0.8;">
+                        <strong>Opción C: Agencia</strong>
+                        <p style="color: var(--danger);">✗ Costo: $30k - $50k</p>
+                        <p style="color: var(--danger);">✗ Overhead excesivo</p>
                     </div>
                 </div>
-            </div>
+                <div class="card" style="border: 2px solid var(--primary); background: #eff6ff;">
+                    <strong style="color: var(--primary);">Opción D: Criterio AI</strong>
+                    <ul class="feature-list" style="margin-top: 0.5rem;">
+                        <li>✅ Costo: $16,500 USD</li>
+                        <li>✅ Duración: 5.5 meses</li>
+                        <li>✅ Expertise especializado (IA + Legacy)</li>
+                        <li>✅ Comunicación directa</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 10. PRÓXIMOS PASOS -->
+            <section id="steps">
+                <h2 class="section-title">10. Próximos Pasos</h2>
+                <div class="card">
+                    <ol class="step-list" style="margin-left: 1.5rem;">
+                        <li><strong>Evaluación Interna (Semana 1):</strong> Socializar propuesta, evaluar presupuesto.
+                        </li>
+                        <li><strong>Reunión de Alineación (Semana 2):</strong> Revisión preguntas, ajustes finales.</li>
+                        <li><strong>Firma y Kickoff (Semana 3):</strong> Contrato, NDA, entrega de accesos, Inicio Fase
+                            0.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- 11. CONTACTO -->
+            <section id="contacto">
+                <h2 class="section-title">11. Contacto</h2>
+                <div class="card"
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem;">Criterio AI</h3>
+                        <p style="color: var(--text-muted);">Especialistas en modernización de sistemas legacy con IA.
+                        </p>
+                        <div style="margin-top: 1.5rem;">
+                            <strong>Hernando Gaitán Díaz</strong><br>
+                            Link a: <a href="anexos.html" style="color: var(--primary);">Sustentación Técnica</a> | <a
+                                href="cronograma.html" style="color: var(--primary);">Cronograma</a>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <p>📧 hernandogaitandiaz@gmail.com</p>
+                        <p>📱 +57 320 837 9165</p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Lunes a Viernes:
+                            9:00 - 18:00 (Chile)</p>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="orden_servicio.html" target="_blank"
+                                style="color: var(--primary); font-weight: 600; text-decoration: underline;">Ver Orden
+                                de Servicio (Imprimible)</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
-        
-        <div class="footer">
-            <p><strong>Criterio AI</strong> • Propuesta Proyecto Agente IA Sorimex • Febrero 2026</p>
-            <p style="margin-top: 8px; font-size: 0.85em;">Para imprimir: Ctrl+P o Cmd+P • Para captura de pantalla: usar herramienta de captura del sistema</p>
+    </main>
+
+    <footer class="footer">
+        <div class="nav-container" style="flex-direction: column;">
+            <h2>CRITERIO AI</h2>
+            <p style="opacity: 0.7;">Agente IA para Automatización de Procesos Sorimex</p>
+            <div class="footer-links">
+                <a href="#">Propuesta</a>
+                <a href="cronograma.html">Cronograma</a>
+                <a href="anexos.html">Sustentación Técnica</a>
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.5;">© 2026 Criterio AI. Confidencial.</p>
         </div>
-    </div>
+    </footer>
+
 </body>
+
 </html>
