@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orden de Servicio - Criterio AI</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            color: #000;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+        }
+
+        .header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .meta {
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        .total-row td {
+            font-weight: bold;
+            border-top: 2px solid #000;
+        }
+
+        .signatures {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .sig-block {
+            width: 45%;
+            border-top: 1px solid #000;
+            padding-top: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #666;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        @media print {
+
+            .print-btn,
+            .back-link {
+                display: none;
+            }
+
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-link">← Volver a Propuesta</a>
+    <button onclick="window.print()" class="print-btn">Imprimir / Guardar PDF</button>
+
+    <div class="header">
+        <div>
+            <div class="title">Criterio AI</div>
+            <div style="font-size: 12px; margin-top: 5px;">Hernando Gaitán Díaz</div>
+        </div>
+        <div class="meta" style="text-align: right;">
+            <strong>ORDEN DE SERVICIO</strong><br>
+            Ref: SORIMEX-IA-001<br>
+            Fecha: 15 de Febrero, 2026
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Clientes</div>
+        <p><strong>Empresa:</strong> SORIMEX S.A.<br>
+            <strong>Atención:</strong> Gerencia General / Gerencia Comercial
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Alcance del Servicio</div>
+        <p>Desarrollo e implementación de Agente de IA para automatización de proformas y pedidos.</p>
+        <ul>
+            <li><strong>Fase 0 (Setup):</strong> Configuración de entorno y accesos.</li>
+            <li><strong>Fase 1 (MVP):</strong> Agente para proformas, lectura Access, generación PDF, Email.</li>
+            <li><strong>Fase 2 (Completo):</strong> Agente para pedidos, integración completa (Sujeto a aprobación Fase
+                1).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Inversión y Términos Económicos</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <th>Valor (USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fase 0: Pre-requisitos y Setup</td>
+                    <td>$1,125</td>
+                </tr>
+                <tr>
+                    <td>Fase 1: Agente + Proformas (MVP)</td>
+                    <td>$8,595</td>
+                </tr>
+                <tr>
+                    <td>Fase 2: Pedidos (Opcional según desempeño Fase 1)</td>
+                    <td>$3,825</td>
+                </tr>
+                <tr>
+                    <td>Cierre y Documentación</td>
+                    <td>$495</td>
+                </tr>
+                <tr>
+                    <td>Contingencia / Buffer</td>
+                    <td>$2,460</td>
+                </tr>
+                <tr class="total-row">
+                    <td>TOTAL PROYECTO</td>
+                    <td>$16,500 USD</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Esquema de Pagos</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hito</th>
+                    <th>%</th>
+                    <th>Monto (USD)</th>
+                    <th>Condición</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. Firma / Inicio</td>
+                    <td>10%</td>
+                    <td>$1,650</td>
+                    <td>Inmediato</td>
+                </tr>
+                <tr>
+                    <td>2. Aprobación Fase 1</td>
+                    <td>45%</td>
+                    <td>$7,425</td>
+                    <td>Semana 13</td>
+                </tr>
+                <tr>
+                    <td>3. Aprobación Fase 2</td>
+                    <td>25%</td>
+                    <td>$4,125</td>
+                    <td>Semana 20</td>
+                </tr>
+                <tr>
+                    <td>4. Cierre y Entrega</td>
+                    <td>20%</td>
+                    <td>$3,300</td>
+                    <td>Semana 22</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Garantía de Satisfacción</div>
+        <p style="font-size: 13px; font-style: italic;">
+            Si tras la finalización de la Fase 1 (Semana 16) el cliente no está satisfecho con el desempeño del sistema
+            en producción,
+            el proyecto puede darse por terminado sin obligación de continuar con la Fase 2 ni los pagos restantes (#3 y
+            #4),
+            entregándose todo el código fuente desarrollado hasta la fecha.
+        </p>
+    </div>
+
+    <div class="signatures">
+        <div class="sig-block">
+            <br><br>
+            <strong>POR: SORIMEX S.A.</strong><br>
+            [Firma Autorizada]<br>
+            CC / NIT:
+        </div>
+        <div class="sig-block">
+            <br><br>
+            <strong>POR: CRITERIO AI</strong><br>
+            Hernando Gaitán Díaz<br>
+            Consultor Líder
+        </div>
+    </div>
+
+</body>
+
+</html>

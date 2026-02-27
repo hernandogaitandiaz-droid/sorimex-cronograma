@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoja de Ruta de Expansión | Agente IA Sorimex</title>
+    <style>
+        :root {
+            --primary: #1B3A6B;
+            --primary-light: #2E75B6;
+            --ola1: #1E7145;
+            --ola2: #C65911;
+            --ola3: #7030A0;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --radius: 8px;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-weight: 800;
+            color: var(--primary-light);
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-light);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .ola-banner {
+            padding: 0.75rem 1.5rem;
+            color: white;
+            font-weight: 700;
+            border-radius: 4px;
+            margin: 2rem 0 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .ola-banner.ola1 {
+            background-color: var(--ola1);
+        }
+
+        .ola-banner.ola2 {
+            background-color: var(--ola2);
+        }
+
+        .ola-banner.ola3 {
+            background-color: var(--ola3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background: white;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #ddd;
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        .evolution-table th {
+            text-align: center;
+        }
+
+        .evolution-table td {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .tag-low {
+            background-color: #e6f4ea;
+            color: var(--ola1);
+        }
+
+        .tag-medium {
+            background-color: #fff4e5;
+            color: var(--ola2);
+        }
+
+        .tag-high {
+            background-color: #f3e8fd;
+            color: var(--ola3);
+        }
+
+        .impact-stars {
+            color: var(--ola1);
+            font-weight: bold;
+        }
+
+        .note-box {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-light);
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Color-coded rows based on the specific complexity/logic */
+        .color-ola1 {
+            background-color: #f0fdf4;
+        }
+
+        .color-ola2 {
+            background-color: #fffaf0;
+        }
+
+        .color-ola3 {
+            background-color: #faf5ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand">CRITERIO AI</a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Propuesta</a>
+                <a href="cronograma.html" class="nav-link">Cronograma</a>
+                <a href="anexos.html" class="nav-link">Sustentación Técnica</a>
+                <a href="#" class="nav-link active">Expansión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="section-header">SECCIÓN 6</div>
+        <h1>Visión de Plataforma y Expansión Futura</h1>
+
+        <div class="intro-text">
+            <p>Lo que se construye en este proyecto no es una herramienta de automatización puntual. Es la base de una
+                <strong>plataforma de inteligencia operacional</strong> sobre el sistema Sorimex.</p>
+            <p style="margin-top: 1rem;">Una vez que el agente tiene acceso directo a Maestro.mdb y las herramientas
+                Python están desarrolladas, incorporar nuevas capacidades es incremental. Esta sección presenta el
+                forecast de crecimiento natural del agente.</p>
+        </div>
+
+        <div class="section-header">Evolución del Agente</div>
+        <table class="evolution-table">
+            <thead>
+                <tr>
+                    <th style="background-color: var(--primary-light);">ETAPA ACTUAL</th>
+                    <th style="background-color: var(--ola1);">OLA 1</th>
+                    <th style="background-color: var(--ola2);">OLA 2</th>
+                    <th style="background-color: var(--ola3);">OLA 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="color: var(--primary-light);">Agente Transaccional</td>
+                    <td style="color: var(--ola1);">Agente Consultivo</td>
+                    <td style="color: var(--ola2);">Agente Operacional</td>
+                    <td style="color: var(--ola3);">Agente Estratégico</td>
+                </tr>
+                <tr style="font-size: 0.85rem; color: var(--text-muted);">
+                    <td>Crea proformas y pedidos en Maestro.mdb</td>
+                    <td>Consultas, alertas, fichas y análisis de cobranza</td>
+                    <td>Procesa documentos externos, notifica clientes</td>
+                    <td>Proyecciones, rentabilidad, presupuesto inteligente</td>
+                </tr>
+                <tr style="font-size: 0.8rem; font-weight: 700;">
+                    <td style="background-color: #eff6ff;">~50% del esfuerzo total</td>
+                    <td style="background-color: #f0fdf4;">~10% del esfuerzo total</td>
+                    <td style="background-color: #fffaf0;">~25% del esfuerzo total</td>
+                    <td style="background-color: #faf5ff;">~15% del esfuerzo total</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- OLA 1 -->
+        <div class="ola-banner ola1">OLA 1 — ALTO IMPACTO — BAJA COMPLEJIDAD</div>
+        <p class="intro-text" style="font-size: 0.95rem;">Estas funciones se apoyan directamente en los datos ya
+            mapeados y las herramientas base del agente. Representan valor inmediato con mínimo desarrollo adicional.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Función</th>
+                    <th>Descripción</th>
+                    <th style="width: 120px;">Esfuerzo</th>
+                    <th style="width: 120px;">Impacto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Estado de pedidos en lenguaje natural</strong></td>
+                    <td>Consulta conversacional sobre pedidos vigentes, saldos pendientes y estados por cliente o
+                        proveedor.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Alertas de pedidos vencidos</strong></td>
+                    <td>Revisión automática de PEDEST para detectar saldos pendientes con fecha estimada de embarque
+                        superada.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Resumen ejecutivo de cobranza</strong></td>
+                    <td>Facturas próximas a vencer o ya vencidas. Seguimiento proactivo sin depender de Access.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Ficha de cliente para reunión</strong></td>
+                    <td>Resumen automático con historial de pedidos, volumen FOB, productos habituales y condiciones de
+                        pago.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-ola2">
+                    <td><strong>Análisis histórico por proveedor</strong></td>
+                    <td>Ventas reales vs presupuesto, evolución mensual y comparativo anual. Versión conversacional del
+                        informe de ventas.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola2);">★★ Medio</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- OLA 2 -->
+        <div class="ola-banner ola2">OLA 2 — ALTO IMPACTO — COMPLEJIDAD MEDIA</div>
+        <p class="intro-text" style="font-size: 0.95rem;">Estas funciones requieren componentes nuevos — principalmente
+            el procesamiento de documentos externos — pero se apoyan sobre la misma infraestructura base.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Función</th>
+                    <th>Descripción</th>
+                    <th style="width: 120px;">Esfuerzo</th>
+                    <th style="width: 120px;">Impacto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Procesamiento de documentos externos</strong></td>
+                    <td>Extracción automática de datos de avisos de llegada, facturas de proveedor y OCs de clientes.
+                    </td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola2);">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Módulo de normalización de formatos</strong></td>
+                    <td>Aprende a mapear campos de formatos desconocidos para procesamiento automático futuro.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola2);">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Registro automatizado de llegadas</strong></td>
+                    <td>Actualiza DETEST y PEDEST.SALDO con confirmación antes de escribir. Elimina transcripción
+                        manual.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola2);">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-ola1">
+                    <td><strong>Notificación automática al cliente</strong></td>
+                    <td>Redacción y envío de email con el detalle de productos recibidos al registrar la llegada.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★★ Medio</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Pre-generación de proformas desde OC</strong></td>
+                    <td>Interpreta orden de compra del cliente y propone la proforma pre-completada para revisión.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola2);">★★★ Alto</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- OLA 3 -->
+        <div class="ola-banner ola3">OLA 3 — IMPACTO ESTRATÉGICO — MAYOR DESARROLLO</div>
+        <p class="intro-text" style="font-size: 0.95rem;">Estas funciones transforman al agente en un instrumento de
+            inteligencia de negocio. Requieren modelado adicional sobre los 25 años de historial.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Función</th>
+                    <th>Descripción</th>
+                    <th style="width: 120px;">Esfuerzo</th>
+                    <th style="width: 120px;">Impacto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Análisis de rentabilidad comercial</strong></td>
+                    <td>Cruza FOB, comisiones y ciclos para identificar relaciones proveedor-cliente de mayor valor
+                        neto.</td>
+                    <td><span class="tag tag-high">Alto</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola3);">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Proyección de flujo de cobranza</strong></td>
+                    <td>Basado en pedidos vigentes y condiciones de pago, proyecta los ingresos de tesorería.</td>
+                    <td><span class="tag tag-high">Alto</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola3);">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-ola1">
+                    <td><strong>Detección de productos sin movimiento</strong></td>
+                    <td>Identifica productos del catálogo sin presencia en proformas recientes. Útil para decisiones de
+                        portafolio.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★ Moderado</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Asistente de presupuesto anual</strong></td>
+                    <td>Sugiere presupuestos por proveedor basados en historial estadístico de ventas reales.</td>
+                    <td><span class="tag tag-high">Alto</span></td>
+                    <td><span class="impact-stars" style="color: var(--ola3);">★★★ Alto</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <strong>Nota sobre la expansión:</strong> Las funciones de la Ola 1 y Ola 2 que generen interés inmediato
+            pueden ser presupuestadas y planificadas en detalle como extensiones del proyecto actual. El objetivo de
+            esta sección es mostrar que la inversión inicial en infraestructura es la base de una plataforma que crece
+            con Sorimex.
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Criterio AI. Transformando el legado en futuro.
+    </footer>
+
+</body>
+
+</html>
