@@ -1,417 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Propuesta Comercial | Agente IA Sorimex</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1e40af;
-            --secondary: #64748b;
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border: #e2e8f0;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --radius: 12px;
+            --primary: #2563eb; --primary-dark: #1e40af; --secondary: #64748b;
+            --bg-body: #f8fafc; --bg-card: #ffffff; --text-main: #0f172a;
+            --text-muted: #475569; --border: #e2e8f0; --success: #10b981;
+            --warning: #f59e0b; --danger: #ef4444; --radius: 12px;
             --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        header { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .brand { font-weight: 800; color: var(--primary); font-size: 1.25rem; text-decoration: none; }
+        .nav-menu { display: flex; gap: 1.5rem; }
+        .nav-link { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary); }
+        .btn-cta { background: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .btn-cta:hover { background: var(--primary-dark); }
 
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+        .hero { text-align: center; padding: 4rem 1.5rem; background: linear-gradient(180deg, white 0%, var(--bg-body) 100%); }
+        .badge { display: inline-block; background: #dbeafe; color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
+        h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero p { font-size: 1.125rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
 
-        /* HEADER & HERO */
-        header {
-            background: white;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1rem 0;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .subsection-title { font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .p-block { margin-bottom: 1rem; color: var(--text-muted); }
+        .feature-list { list-style: none; margin-bottom: 1.5rem; }
+        .feature-list li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+        .feature-list li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 0; }
+        .step-list { counter-reset: step; list-style: none; }
+        .step-list li { position: relative; padding-left: 2rem; margin-bottom: 0.75rem; }
+        .step-list li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 2px; background: var(--secondary); color: white; width: 20px; height: 20px; border-radius: 50%; text-align: center; font-size: 0.75rem; line-height: 20px; font-weight: 700; }
 
-        .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .badge-info { display: inline-block; background: #eff6ff; color: #1e40af; padding: 0.25rem 0.75rem; border-radius: 99px; font-weight: 600; font-size: 0.9rem; margin-top: 0.5rem; }
+        .badge-warning { display: inline-block; background: #fffbeb; color: #b45309; padding: 0.25rem 0.75rem; border-radius: 99px; font-weight: 600; font-size: 0.9rem; }
+        .alert-box { padding: 1rem; border-radius: 8px; background: #fffbea; border: 1px solid #fcd34d; color: #92400e; margin: 1rem 0; }
 
-        .brand {
-            font-weight: 800;
-            color: var(--primary);
-            font-size: 1.25rem;
-        }
+        .section-title { font-size: 1.5rem; font-weight: 700; margin: 3rem 0 1.5rem; color: var(--text-main); display: flex; align-items: center; gap: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+        .card { background: var(--bg-card); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 1.5rem; }
 
-        .nav-menu {
-            display: flex;
-            gap: 1.5rem;
-        }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
 
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
+        /* Tabla procesos */
+        .process-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+        .process-table th { background: #1e40af; color: white; padding: 0.75rem 1rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .process-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+        .process-table tr:hover td { background: #f8fafc; }
+        .process-table .subtotal td { background: #f1f5f9; font-weight: 700; border-top: 2px solid #94a3b8; }
+        .process-table .optional td { color: #64748b; font-style: italic; }
+        .process-table .total td { background: #eff6ff; font-weight: 800; font-size: 1rem; border-top: 2px solid var(--primary); color: var(--primary); }
+        .phase-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+        .ph0 { background: #fff7ed; color: #c2410c; }
+        .ph1 { background: #e0f2fe; color: #0369a1; }
+        .ph2 { background: #eff6ff; color: #1d4ed8; }
+        .ph3 { background: #f0fdf4; color: #15803d; }
+        .ph-opt { background: #eef2ff; color: #4338ca; }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-        }
+        /* Pricing */
+        .pricing-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .pricing-table th, .pricing-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .pricing-table th { background: #f8fafc; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .price-total { font-size: 1.25rem; font-weight: 800; color: var(--primary); }
 
-        .btn-cta {
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
+        /* Fases roadmap */
+        .phase-card { border-radius: 10px; padding: 1.5rem; margin-bottom: 1.25rem; border-left: 5px solid; }
+        .phase-f0 { background: #fff7ed; border-color: #f97316; }
+        .phase-f1 { background: #e0f2fe; border-color: #0ea5e9; }
+        .phase-f2 { background: #eff6ff; border-color: #3b82f6; }
+        .phase-f3 { background: #f0fdf4; border-color: #10b981; }
+        .phase-cierre { background: #faf5ff; border-color: #8b5cf6; }
+        .phase-f4 { background: #eef2ff; border-color: #6366f1; opacity: 0.9; }
+        .phase-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+        .phase-meta { font-size: 0.85rem; color: var(--text-muted); }
+        .hito-badge { display: inline-block; background: #fce7f3; color: #be185d; border-radius: 6px; padding: 3px 10px; font-weight: 700; font-size: 0.8rem; margin-top: 0.5rem; }
 
-        .btn-cta:hover {
-            background: var(--primary-dark);
-        }
+        .chat-sim { background: #f1f5f9; border-radius: 12px; padding: 1.5rem; font-family: monospace; font-size: 0.9rem; margin: 1rem 0; }
+        .chat-user { color: var(--text-muted); }
+        .chat-bot { color: var(--primary); font-weight: 600; }
 
-        .hero {
-            text-align: center;
-            padding: 4rem 1.5rem;
-            background: linear-gradient(180deg, white 0%, var(--bg-body) 100%);
-        }
-
-        .badge {
-            display: inline-block;
-            background: #dbeafe;
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        /* CONTENT CONTAINER */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        /* TEXT STYLES */
-        .subsection-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .p-block {
-            margin-bottom: 1rem;
-            color: var(--text-muted);
-        }
-
-        /* LISTS */
-        .feature-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-list li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .feature-list li::before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        .step-list {
-            counter-reset: step;
-            list-style: none;
-        }
-
-        .step-list li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .step-list li::before {
-            counter-increment: step;
-            content: counter(step);
-            position: absolute;
-            left: 0;
-            top: 2px;
-            background: var(--secondary);
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 0.75rem;
-            line-height: 20px;
-            font-weight: 700;
-        }
-
-        /* BADGES */
-        .badge-warning {
-            display: inline-block;
-            background: #fffbeb;
-            color: #b45309;
-            padding: 0.25rem 0.75rem;
-            border-radius: 99px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .badge-info {
-            display: inline-block;
-            background: #eff6ff;
-            color: #1e40af;
-            padding: 0.25rem 0.75rem;
-            border-radius: 99px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .alert-box {
-            padding: 1rem;
-            border-radius: 8px;
-            background: #fffbea;
-            border: 1px solid #fcd34d;
-            color: #92400e;
-            margin: 1rem 0;
-        }
-
-        /* CARDS & SECTIONS */
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 3rem 0 1.5rem;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            margin-bottom: 1.5rem;
-        }
-
-        /* SUMMARY STATS */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .stat-item {
-            background: #f1f5f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-val {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* COMPARISON TABLE */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .process-title {
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: block;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-        }
-
-        .process-list li {
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .icon-bad {
-            color: var(--warning);
-            min-width: 1.25rem;
-        }
-
-        .icon-good {
-            color: var(--success);
-            min-width: 1.25rem;
-        }
-
-        /* INVESTMENT TABLE */
-        .pricing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        .pricing-table th,
-        .pricing-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .pricing-table th {
-            background: #f8fafc;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pricing-table tr:last-child {
-            border-bottom: none;
-        }
-
-        .price-total {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        /* CONTACT FOOTER */
-        .footer {
-            background: #1e293b;
-            color: white;
-            padding: 4rem 1.5rem;
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        .footer h2 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .footer a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer a:hover {
-            color: white;
-        }
-
-        /* CHAT SIMULATION */
-        .chat-sim {
-            background: #f1f5f9;
-            border-radius: 12px;
-            padding: 1.5rem;
-            font-family: monospace;
-            font-size: 0.9rem;
-            margin: 1rem 0;
-        }
-
-        .chat-msg {
-            margin-bottom: 0.75rem;
-        }
-
-        .chat-user {
-            color: var(--text-muted);
-        }
-
-        .chat-bot {
-            color: var(--primary);
-            font-weight: 600;
-        }
+        .footer { background: #1e293b; color: white; padding: 4rem 1.5rem; margin-top: 4rem; text-align: center; }
+        .footer h2 { color: white; margin-bottom: 1rem; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+        .footer a { color: #94a3b8; text-decoration: none; }
+        .footer a:hover { color: white; }
     </style>
 </head>
-
 <body>
-
     <header>
         <div class="nav-container">
-            <a href="index.html" class="brand" style="text-decoration: none;">CRITERIO AI</a>
+            <a href="index.html" class="brand" style="text-decoration:none;">CRITERIO AI</a>
             <nav class="nav-menu">
                 <a href="#" class="nav-link active">Propuesta</a>
                 <a href="cronograma.html" class="nav-link">Cronograma</a>
@@ -422,423 +107,199 @@
     </header>
 
     <main>
-        <!-- HERO -->
         <section class="hero">
-            <span class="badge">PROPUESTA COMERCIAL v1.0</span>
-            <h1>Agente IA para Automatización<br>de Procesos Sorimex</h1>
-            <p>Reducción del 87% en tiempo operativo, cero errores en cálculos y liberación de 15 horas mensuales del
-                equipo comercial.</p>
-            <div style="display: flex; justify-content: center; gap: 1rem;">
-                <a href="#inversion" class="btn-cta" style="padding: 0.75rem 1.5rem; font-size: 1rem;">Ver Inversión</a>
-                <a href="anexos.html" class="nav-link"
-                    style="border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: 6px; background: white;">Ver
-                    Análisis Técnico</a>
+            <span class="badge">PROPUESTA COMERCIAL v2.0 · Marzo 2026</span>
+            <h1>Agente IA para Automatización<br>de Operaciones Sorimex</h1>
+            <p>7 procesos automatizados. Primera victoria en semana 8. Sistema completo en semana 24.</p>
+            <div style="display:flex; justify-content:center; gap:1rem;">
+                <a href="#inversion" class="btn-cta" style="padding:0.75rem 1.5rem; font-size:1rem;">Ver Inversión</a>
+                <a href="anexos.html" class="nav-link" style="border:1px solid var(--border); padding:0.75rem 1.5rem; border-radius:6px; background:white;">Ver Análisis Técnico</a>
             </div>
         </section>
 
         <div class="container">
+
             <!-- 1. RESUMEN EJECUTIVO -->
             <section id="resumen">
                 <h2 class="section-title">1. Resumen Ejecutivo</h2>
                 <div class="card">
-                    <p class="p-block">
-                        Sorimex invierte actualmente <strong>~18.2 horas mensuales</strong> en tareas manuales
-                        relacionadas con la creación de proformas y pedidos. Este tiempo operativo podría estar dedicado
-                        a actividades comerciales de mayor valor.
-                    </p>
-                    <p class="p-block">
-                        <strong>Proponemos desarrollar un agente conversacional con Inteligencia Artificial</strong> que
-                        automatice el proceso completo: desde la solicitud verbal hasta el email enviado con PDF y
-                        documentación organizada.
-                    </p>
+                    <p class="p-block">El equipo de Sorimex dedica tiempo valioso a <strong>7 procesos operativos repetitivos</strong> que pueden automatizarse completamente: desde la actualización semanal de estatus de pedidos hasta el cierre y notificación al cliente.</p>
+                    <p class="p-block"><strong>Proponemos un agente conversacional con Inteligencia Artificial</strong> que automatiza estos 7 procesos de forma incremental, entregando valor desde la semana 8 — no al final del proyecto.</p>
 
-                    <h3 class="subsection-title">Beneficios Clave</h3>
+                    <h3 class="subsection-title" style="margin-top:1.5rem;">Beneficios Clave</h3>
                     <ul class="feature-list">
-                        <li><strong>Reducción del 87% en tiempo</strong> por transacción (15 min → 2 min)</li>
-                        <li><strong>Cero errores</strong> en cálculos de FOB, peso bruto y embalajes</li>
-                        <li><strong>Respuesta instantánea</strong> a solicitudes de clientes</li>
-                        <li><strong>Liberación de 15+ horas/mes</strong> del equipo para actividades comerciales</li>
-                        <li><strong>Escalabilidad</strong> sin necesidad de contratar personal adicional</li>
+                        <li><strong>Primera victoria en semana 8:</strong> Miguel elimina el proceso manual de estatus semanal</li>
+                        <li><strong>Reducción del 87% en tiempo</strong> por proforma y pedido</li>
+                        <li><strong>Cero errores</strong> en cálculos FOB, peso bruto y embalajes</li>
+                        <li><strong>Ciclo completo automatizado</strong> en semana 24</li>
+                        <li><strong>Escalabilidad</strong> sin contratar personal adicional</li>
                     </ul>
 
-                    <h3 class="subsection-title" style="margin-top: 2rem;">Inversión y Retorno</h3>
-                    <div class="table-container">
-                        <table>
-                            <tr>
-                                <td><strong>Inversión Total</strong></td>
-                                <td>USD $16,500</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ahorro Anual Estimado</strong></td>
-                                <td>USD $8,000 - $12,000</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Payback</strong></td>
-                                <td>1.5 - 2.3 años</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Duración Proyecto</strong></td>
-                                <td>5.5 meses</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <h3 class="subsection-title" style="margin-top: 2rem;">Enfoque de Implementación</h3>
-                    <ul class="feature-list">
-                        <li>✅ <strong>Fase 1 (3 meses):</strong> Automatización de proformas → Victoria temprana</li>
-                        <li>✅ <strong>Fase 2 (2 meses):</strong> Automatización de pedidos → Sistema completo</li>
-                        <li>✅ <strong>Producción incremental:</strong> Validación continua con usuarios reales</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- 2. SITUACIÓN ACTUAL -->
-            <section id="situacion">
-                <h2 class="section-title">2. Situación Actual</h2>
-
-                <div class="card">
-                    <h3 class="subsection-title">Proceso Manual de Proformas</h3>
-                    <p class="p-block"><strong>Pasos actuales:</strong></p>
-                    <ol class="step-list" style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li>Recepción de solicitud (email/teléfono/reunión)</li>
-                        <li>Ingreso manual de datos en formulario Access</li>
-                        <li>Validación de cálculos (FOB, peso bruto, embalajes)</li>
-                        <li>Generación manual de PDF (Access no lo hace nativamente)</li>
-                        <li>Creación de estructura de carpetas según protocolo Sorimex</li>
-                        <li>Armado de email con plantilla</li>
-                        <li>Envío de documentación</li>
-                    </ol>
-                    <p class="badge-warning"><strong>Tiempo promedio:</strong> 15 minutos por proforma</p>
-
-                    <h3 class="subsection-title" style="margin-top: 2rem;">Costo Actual</h3>
-                    <div class="comparison-grid">
-                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
-                            <strong>Con 50 proformas/mes:</strong>
-                            <ul style="margin-top: 0.5rem; list-style: none;">
-                                <li>• Tiempo total: <strong>12.5 horas/mes</strong></li>
-                                <li>• Costo estimado: <strong>$250 USD/mes</strong></li>
-                            </ul>
+                    <h3 class="subsection-title" style="margin-top:1.5rem;">Inversión y Retorno</h3>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-top:1rem;">
+                        <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
+                            <span style="font-size:1.6rem; font-weight:800; color:var(--primary); display:block;">$14,720</span>
+                            <span style="font-size:0.82rem; color:var(--text-muted);">Inversión contrato inicial</span>
                         </div>
-                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
-                            <strong>Con 40 pedidos/mes:</strong>
-                            <ul style="margin-top: 0.5rem; list-style: none;">
-                                <li>• Tiempo total: <strong>6.7 horas/mes</strong></li>
-                                <li>• Costo estimado: <strong>$134 USD/mes</strong></li>
-                            </ul>
+                        <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
+                            <span style="font-size:1.6rem; font-weight:800; color:var(--success); display:block;">Sem 8</span>
+                            <span style="font-size:0.82rem; color:var(--text-muted);">Primera victoria en producción</span>
                         </div>
-                    </div>
-                    <div style="margin-top: 1rem; text-align: center; font-weight: 700; color: var(--danger);">
-                        Costo anual operativo: ~$4,600 USD (solo tiempo directo)
-                    </div>
-
-                    <h3 class="subsection-title" style="margin-top: 2rem;">Costos Ocultos</h3>
-                    <p class="p-block">Más allá del tiempo directo, el proceso manual genera:</p>
-                    <ul class="feature-list">
-                        <li>⏰ Retrasos en respuesta a clientes (horas a días)</li>
-                        <li>❌ Errores humanos en cálculos (2-5% incidencia estimada)</li>
-                        <li>😫 Frustración del equipo con tareas repetitivas</li>
-                        <li>📉 Imposibilidad de escalar sin contratar más personal</li>
-                        <li>💰 Oportunidades comerciales perdidas</li>
-                    </ul>
-                    <div class="alert-box" style="margin-top: 1.5rem;">
-                        <strong>Costo de oportunidad estimado:</strong> $4,000 - $8,000 USD/año adicionales
+                        <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
+                            <span style="font-size:1.6rem; font-weight:800; color:var(--text-main); display:block;">23 sem</span>
+                            <span style="font-size:0.82rem; color:var(--text-muted);">Duración contrato inicial</span>
+                        </div>
+                        <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
+                            <span style="font-size:1.6rem; font-weight:800; color:var(--warning); display:block;">1.5–2.3</span>
+                            <span style="font-size:0.82rem; color:var(--text-muted);">Años de payback</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- SITUACION ACTUAL VS FUTURA -->
+            <!-- 3. SOLUCIÓN -->
             <section id="solucion">
-                <h2 class="section-title">Del Proceso Manual a la Automatización</h2>
-                <div class="comparison-grid">
-                    <div class="card" style="border-left: 4px solid var(--warning);">
-                        <span class="process-title" style="color: var(--warning);">Situación Actual</span>
-                        <ul class="process-list" style="list-style: none;">
-                            <li><span class="icon-bad">⏰</span> 15 minutos por proforma</li>
-                            <li><span class="icon-bad">⌨️</span> Ingreso manual en Access</li>
-                            <li><span class="icon-bad">⚠️</span> Validación manual de cálculos</li>
-                            <li><span class="icon-bad">📄</span> Generación manual de PDF</li>
-                            <li><span class="icon-bad">📧</span> Redacción manual de emails</li>
-                        </ul>
-                    </div>
-                    <div class="card" style="border-left: 44px solid var(--success);">
-                        <span class="process-title" style="color: var(--success);">Solución Propuesta</span>
-                        <ul class="process-list" style="list-style: none;">
-                            <li><span class="icon-good">⚡</span> 2 minutos por transacción</li>
-                            <li><span class="icon-good">💬</span> Instrucción por Chat (Telegram)</li>
-                            <li><span class="icon-good">🤖</span> Cálculos automáticos (0 error)</li>
-                            <li><span class="icon-good">📎</span> PDF y Carpetas automáticos</li>
-                            <li><span class="icon-good">📨</span> Email listo para enviar</li>
-                            <h2 class="section-title">3. Solución Propuesta</h2>
-
-                            <div class="card">
-                                <h3 class="subsection-title">Visión General</h3>
-                                <p class="p-block">Un <strong>agente conversacional con Inteligencia Artificial</strong>
-                                    que permite crear proformas y pedidos mediante instrucciones en lenguaje natural:
-                                </p>
-
-                                <div class="chat-sim">
-                                    <div class="chat-msg">
-                                        <span class="chat-user">Usuario (vía Telegram):</span><br>
-                                        "Crear proforma para EMPROQUIM, 200 unidades de EM-GR-703000, CIF vía aérea,
-                                        entrega Santiago"
-                                    </div>
-                                    <div class="chat-sep" style="text-align:center; color:#ccc; margin: 1rem 0;">↓ (2
-                                        minutos)</div>
-                                    <div class="chat-msg">
-                                        <span class="chat-bot">Agente responde:</span><br>
-                                        "✅ Proforma 19850 creada<br>
-                                        📎 PDF: Proforma_19850.pdf<br>
-                                        📧 Email enviado para tu revisión<br>
-                                        📁 Guardado en: 2026/02/PROCAPS/Proforma_19850/"
-                                    </div>
-                                </div>
-
-                                <h3 class="subsection-title" style="margin-top: 2rem;">Arquitectura Técnica</h3>
-                                <p class="p-block"><strong>Componentes principales:</strong></p>
-                                <ol class="step-list" style="margin-left: 1.5rem;">
-                                    <li><strong>Interfaz Conversacional:</strong> Telegram (MVP) - familiar y accesible.
-                                        Extensible a WhatsApp Business.</li>
-                                    <li><strong>Motor de Inteligencia Artificial:</strong> Claude 4 Sonnet (Anthropic),
-                                        RAG para catálogos, comprensión natural.</li>
-                                    <li><strong>Integración con Access:</strong> Lectura/escritura directa (sin abrir
-                                        Access). Generación de PDFs usando informes existentes.</li>
-                                    <li><strong>Automatización de Workflows:</strong> N8N (open-source). Gestión de
-                                        carpetas y emails.</li>
-                                </ol>
-
-                                <h3 class="subsection-title" style="margin-top: 2rem;">Interacción con Microsoft Access
-                                </h3>
-                                <p class="p-block">Python interactúa con Access de forma especializada:</p>
-                                <div class="table-container">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Componente Access</th>
-                                                <th>Método</th>
-                                                <th>Requiere Abrir Access</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><strong>Tablas</strong></td>
-                                                <td>pyodbc (SQL directo)</td>
-                                                <td>❌ No</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Consultas</strong></td>
-                                                <td>pyodbc (SQL propio)</td>
-                                                <td>❌ No</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Formularios</strong></td>
-                                                <td>Lógica reimplementada en Python</td>
-                                                <td>❌ No usa</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Informes</strong></td>
-                                                <td>win32com (exporta a PDF)</td>
-                                                <td>✅ Sí (invisible)</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <ul class="feature-list" style="margin-top: 1rem;">
-                                    <li>✅ PDFs 100% idénticos a los actuales</li>
-                                    <li>✅ Mantiene toda la lógica de negocio</li>
-                                    <li>✅ Cero disrupción del sistema actual</li>
-                                </ul>
-
-                                <h3 class="subsection-title" style="margin-top: 2rem;">Flujo Operativo (Nivel 1 -
-                                    Asistente Supervisado)</h3>
-                                <div
-                                    style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; text-align: center; font-family: monospace;">
-                                    Funcionario → Instrucción (Telegram)<br>
-                                    ↓<br>
-                                    Agente → Crea proforma/pedido + PDF + Carpetas<br>
-                                    ↓<br>
-                                    Agente → Envía EMAIL AL FUNCIONARIO (no al cliente)<br>
-                                    ↓<br>
-                                    Funcionario → Revisa PDF adjunto<br>
-                                    ↓<br>
-                                    Funcionario → Reply/Forward al cliente
-                                </div>
-                                <p class="p-block" style="margin-top: 1rem;">
-                                    <strong>Beneficios:</strong> Control total del funcionario, validación humana
-                                    obligatoria, y construcción gradual de confianza.
-                                </p>
-                            </div>
-            </section>
-
-            <!-- 4. ROADMAP DE IMPLEMENTACIÓN -->
-            <section id="roadmap">
-                <h2 class="section-title">4. Roadmap de Implementación</h2>
-
+                <h2 class="section-title">2. Solución Propuesta</h2>
                 <div class="card">
-                    <h3 class="subsection-title">FASE 0: Pre-requisitos y Setup (Semanas 1-2)</h3>
-                    <p class="p-block"><strong>Responsabilidad Sorimex:</strong> Acceso servidor, email agente,
-                        protocolo carpetas, backup.</p>
-                    <p class="p-block"><strong>Responsabilidad Criterio AI:</strong> Setup entorno, análisis VBA,
-                        arquitectura, repo Git.</p>
-                    <p class="badge-info">Inversión: $1,125 USD</p>
-
-                    <h3 class="subsection-title" style="margin-top: 2rem;">FASE 1: Agente + Proformas (Semanas 3-14)
-                    </h3>
-                    <ul class="feature-list">
-                        <li><strong>Data Access Layer (DAL):</strong> Lectura/escritura Access, cálculos FOB.</li>
-                        <li><strong>Generación PDF:</strong> Exportación informes, nomenclatura.</li>
-                        <li><strong>Sistema de Carpetas:</strong> Estructura automática.</li>
-                        <li><strong>Agente AI Core:</strong> Prompts Claude, RAG, NLP.</li>
-                        <li><strong>Módulo Email:</strong> Plantillas profesionales.</li>
-                        <li><strong>Workflows N8N:</strong> Integración end-to-end.</li>
-                        <li><strong>Dashboard Supervisión:</strong> Vista de conversaciones.</li>
-                    </ul>
-                    <div class="alert-box" style="margin-top: 1rem;">
-                        <strong>🚀 PRODUCCIÓN FASE 1 (Semanas 14-15):</strong> Lanzamiento gradual. Victoria Temprana.
+                    <h3 class="subsection-title">Visión General</h3>
+                    <p class="p-block">Un <strong>agente conversacional con IA</strong> que recibe instrucciones en lenguaje natural y ejecuta los procesos directamente sobre Maestro.mdb — sin abrir Access, sin re-ingreso manual de datos.</p>
+                    <div class="chat-sim">
+                        <div style="margin-bottom:0.75rem;"><span class="chat-user">Miguel (Telegram):</span><br>"Procesa el Excel de PROCAPS que llegó hoy"</div>
+                        <div style="text-align:center; color:#ccc; margin:0.75rem 0;">↓ (2 minutos)</div>
+                        <div><span class="chat-bot">Agente:</span><br>"✅ 8 pedidos actualizados en Access<br>📧 Borradores listos para tu revisión antes de enviar<br>📋 PROCAPS: SXP-012-26 → Embarcado 15-Jun, SXP-015-26 → En tránsito..."</div>
                     </div>
-                    <p class="badge-info">Inversión: $8,595 USD</p>
 
-                    <h3 class="subsection-title" style="margin-top: 2rem;">FASE 2: Generación de Pedidos (Semanas 16-22)
-                    </h3>
-                    <ul class="feature-list">
-                        <li><strong>Lógica de Pedidos:</strong> Generación PEDNUM, conversión Proforma->Pedido.</li>
-                        <li><strong>PDF Pedidos + Workflows:</strong> Exportación y plantillas proveedores.</li>
-                        <li><strong>Refinamiento:</strong> Ajustes por feedback Fase 1.</li>
+                    <h3 class="subsection-title" style="margin-top:1.5rem;">Interacción con Microsoft Access</h3>
+                    <table style="width:100%; border-collapse:collapse; font-size:0.9rem; margin-top:0.5rem;">
+                        <thead><tr><th style="background:#1e40af; color:white; padding:0.6rem 1rem; text-align:left;">Componente</th><th style="background:#1e40af; color:white; padding:0.6rem 1rem;">Método</th><th style="background:#1e40af; color:white; padding:0.6rem 1rem;">Abre Access</th></tr></thead>
+                        <tbody>
+                            <tr><td style="padding:0.6rem 1rem; border-bottom:1px solid var(--border);">Tablas</td><td style="padding:0.6rem 1rem; border-bottom:1px solid var(--border);">pyodbc (SQL directo)</td><td style="padding:0.6rem 1rem; border-bottom:1px solid var(--border);">❌ No</td></tr>
+                            <tr><td style="padding:0.6rem 1rem; border-bottom:1px solid var(--border);">Formularios</td><td style="padding:0.6rem 1rem; border-bottom:1px solid var(--border);">Lógica reimplementada en Python</td><td style="padding:0.6rem 1rem; border-bottom:1px solid var(--border);">❌ No usa</td></tr>
+                            <tr><td style="padding:0.6rem 1rem;">Informes (PDF)</td><td style="padding:0.6rem 1rem;">win32com (exporta silenciosamente)</td><td style="padding:0.6rem 1rem;">✅ Sí, invisible</td></tr>
+                        </tbody>
+                    </table>
+                    <ul class="feature-list" style="margin-top:1rem;">
+                        <li>✅ PDFs 100% idénticos a los actuales — usa los diseños Access existentes</li>
+                        <li>✅ Cero disrupción del sistema actual en producción</li>
+                        <li>✅ Mantiene 25 años de lógica de negocio intacta</li>
                     </ul>
-                    <div class="alert-box" style="margin-top: 1rem;">
-                        <strong>🚀 PRODUCCIÓN FASE 2 (Semanas 21-22):</strong> Sistema Completo en operación.
-                    </div>
-                    <p class="badge-info">Inversión: $3,825 USD</p>
-
-                    <h3 class="subsection-title" style="margin-top: 2rem;">CIERRE: Documentación y Entrega (Semana 22)
-                    </h3>
-                    <p class="p-block">Manual de usuario, documentación técnica, videos tutoriales y sesión de cierre.
-                    </p>
-                    <p class="badge-info">Inversión: $495 USD</p>
                 </div>
             </section>
 
-            <!-- 5. CRONOGRAMA VISUAL -->
+            <!-- 4. ROADMAP -->
+            <section id="roadmap">
+                <h2 class="section-title">3. Roadmap de Implementación</h2>
+
+                <div class="phase-card phase-f0">
+                    <div class="phase-title">FASE 0 — Setup e Infraestructura · Semanas 1–3</div>
+                    <div class="phase-meta">24h · Entorno Python, accesos servidor, conexión pyodbc, arquitectura, sandbox de Maestro.mdb</div>
+                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$960 USD</span>
+                </div>
+
+                <div class="phase-card phase-f1">
+                    <div class="phase-title">FASE 1 — P1: Actualizar Estatus Semanal · Semanas 4–8</div>
+                    <div class="phase-meta">59h · Recibe Excel del proveedor → actualiza Access → genera ~8 correos a clientes → Miguel los revisa y aprueba antes de enviar</div>
+                    <div class="hito-badge">🚀 Semana 8: Miguel ve resultados — dolor #1 eliminado</div>
+                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$2,360 USD</span>
+                </div>
+
+                <div class="phase-card phase-f2">
+                    <div class="phase-title">FASE 2 — P2+P3: Proformas y Pedidos · Semanas 9–17</div>
+                    <div class="phase-meta">128h · P2: Crear proforma desde instrucción natural (FOB, PDF, carpetas, email) · P3: Generar pedido desde proforma aceptada (PEDNUM, PEDFIL, DOCFIL)</div>
+                    <div class="hito-badge">🚀 Semana 17: Mauricio y Diego en producción</div>
+                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$5,120 USD</span>
+                </div>
+
+                <div class="phase-card phase-f3">
+                    <div class="phase-title">FASE 3 — P4–P7: Ciclo Completo · Semanas 18–24</div>
+                    <div class="phase-meta">95h · P4: Registrar factura del proveedor · P5: Registrar llegada de mercadería · P6: Registrar remesa (pago) · P7: Cierre de pedido + notificación al cliente</div>
+                    <div class="hito-badge">🚀 Semana 24: Sistema completo — ciclo de importación 100% automatizado</div>
+                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$3,800 USD</span>
+                </div>
+
+                <div class="phase-card phase-cierre">
+                    <div class="phase-title">CIERRE — Documentación y Entrega · Semanas 25–26</div>
+                    <div class="phase-meta">86h overhead incluido · Manual de usuario, documentación técnica, capacitación, entrega de código fuente</div>
+                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">Incluido en overhead ($3,440)</span>
+                </div>
+
+                <div class="phase-card phase-f4">
+                    <div class="phase-title">FASE 4 — P8–P10: Expansión · Semanas 27–30 (opcional)</div>
+                    <div class="phase-meta">42h · P8: Consultas de estatus en lenguaje natural · P9: Alertas automáticas de pedidos vencidos · P10: Fichas de cliente para reuniones</div>
+                    <span class="badge-info" style="background:#eef2ff; color:#4338ca; margin-top:0.5rem; display:inline-block;">+$1,680 USD · Se activa si Sorimex aprueba</span>
+                </div>
+            </section>
+
+            <!-- 5. CRONOGRAMA -->
             <section id="cronograma-sec">
-                <h2 class="section-title">5. Cronograma Visual</h2>
-                <div class="card" style="text-align: center;">
-                    <p class="p-block">El proyecto tiene una duración total estimada de <strong>22 semanas (5.5
-                            meses)</strong>.</p>
-                    <a href="cronograma.html" class="btn-cta" style="display: inline-block; margin-top: 1rem;">Ver
-                        Cronograma Detallado Gantt</a>
+                <h2 class="section-title">4. Cronograma Visual</h2>
+                <div class="card" style="text-align:center;">
+                    <p class="p-block">Gantt interactivo con 26 semanas, 3 victorias en producción y Fase 4 opcional.</p>
+                    <a href="cronograma.html" class="btn-cta" style="display:inline-block; margin-top:1rem;">Ver Cronograma Gantt Detallado</a>
                 </div>
             </section>
 
             <!-- 6. INVERSIÓN -->
             <section id="inversion">
-                <h2 class="section-title">6. Inversión</h2>
+                <h2 class="section-title">5. Inversión</h2>
                 <div class="card">
-                    <h3 class="subsection-title">Desglose por Fase</h3>
-                    <table class="pricing-table">
+                    <h3 class="subsection-title">Desglose por Proceso — Contrato Inicial</h3>
+                    <table class="process-table">
                         <thead>
                             <tr>
+                                <th>Proceso</th>
                                 <th>Fase</th>
-                                <th>Horas</th>
-                                <th>Inversión</th>
-                                <th>%</th>
+                                <th style="width:70px;">Horas</th>
+                                <th style="width:120px;">Costo USD</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><strong>Fase 0:</strong> Pre-requisitos</td>
-                                <td>25h</td>
-                                <td>$1,125</td>
-                                <td>7%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Fase 1:</strong> Agente + Proformas</td>
-                                <td>191h</td>
-                                <td>$8,595</td>
-                                <td>52%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Fase 2:</strong> Pedidos</td>
-                                <td>85h</td>
-                                <td>$3,825</td>
-                                <td>23%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Cierre:</strong> Documentación</td>
-                                <td>11h</td>
-                                <td>$495</td>
-                                <td>3%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Contingencia:</strong> Buffer</td>
-                                <td>47h</td>
-                                <td>$2,460</td>
-                                <td>15%</td>
-                            </tr>
-                            <tr style="background: #f8fafc; border-top: 2px solid var(--primary);">
-                                <td style="font-weight: 800;">TOTAL</td>
-                                <td style="font-weight: 800;">359h</td>
-                                <td class="price-total">$16,500</td>
-                                <td style="font-weight: 800;">100%</td>
-                            </tr>
+                            <tr><td>P1 — Actualizar estatus semanal de pedidos</td><td><span class="phase-badge ph1">Fase 1</span></td><td>59h</td><td>$2,360</td></tr>
+                            <tr><td>P2 — Crear proforma</td><td><span class="phase-badge ph2">Fase 2</span></td><td>88h</td><td>$3,520</td></tr>
+                            <tr><td>P3 — Generar pedido desde proforma</td><td><span class="phase-badge ph2">Fase 2</span></td><td>40h</td><td>$1,600</td></tr>
+                            <tr><td>P4 — Registrar factura de proveedor</td><td><span class="phase-badge ph3">Fase 3</span></td><td>21h</td><td>$840</td></tr>
+                            <tr><td>P5 — Registrar llegada de mercadería</td><td><span class="phase-badge ph3">Fase 3</span></td><td>36h</td><td>$1,440</td></tr>
+                            <tr><td>P6 — Registrar remesa (pago de factura)</td><td><span class="phase-badge ph3">Fase 3</span></td><td>17h</td><td>$680</td></tr>
+                            <tr><td>P7 — Cierre de pedido + notificación cliente</td><td><span class="phase-badge ph3">Fase 3</span></td><td>21h</td><td>$840</td></tr>
+                            <tr><td>Overhead fijo (setup, integración, testing, docs)</td><td><span class="phase-badge ph0">Overhead</span></td><td>86h</td><td>$3,440</td></tr>
+                            <tr class="subtotal"><td colspan="2"><strong>Total contrato inicial</strong></td><td><strong>368h</strong></td><td><strong>$14,720</strong></td></tr>
+                            <tr class="optional"><td>P8–P10 — Consultas, alertas, fichas de cliente</td><td><span class="phase-badge ph-opt">Fase 4</span></td><td>42h</td><td>$1,680</td></tr>
+                            <tr class="total"><td colspan="2">Total con expansión (si aplica)</td><td>410h</td><td>$16,400 USD</td></tr>
                         </tbody>
                     </table>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem;">Tasa: $40 USD/hora · ~3 horas diarias de trabajo · Diferencia con propuesta anterior: −$100 USD</p>
 
-                    <h3 class="subsection-title" style="margin-top: 2rem;">Estructura de Pago (Hitos)</h3>
+                    <h3 class="subsection-title" style="margin-top:2rem;">Estructura de Pagos — Contrato Inicial ($14,720)</h3>
                     <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>Hito</th>
-                                <th>Monto</th>
-                                <th>%</th>
-                                <th>Cuándo</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Hito</th><th>%</th><th>Monto</th><th>Cuándo</th></tr></thead>
                         <tbody>
-                            <tr>
-                                <td><strong>#1</strong> Inicio</td>
-                                <td>$1,650</td>
-                                <td>10%</td>
-                                <td>Firma de contrato</td>
-                            </tr>
-                            <tr>
-                                <td><strong>#2</strong> Fase 1 (Sandbox)</td>
-                                <td>$7,425</td>
-                                <td>45%</td>
-                                <td>Semana 13 (aprobación)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>#3</strong> Fase 2</td>
-                                <td>$4,125</td>
-                                <td>25%</td>
-                                <td>Semana 20 (aprobación)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>#4</strong> Cierre</td>
-                                <td>$3,300</td>
-                                <td>20%</td>
-                                <td>Semana 22 (aceptación)</td>
-                            </tr>
+                            <tr><td><strong>#1</strong> Firma / Inicio</td><td>10%</td><td>$1,472</td><td>Al firmar contrato</td></tr>
+                            <tr><td><strong>#2</strong> P1 en producción (Miguel)</td><td>25%</td><td>$3,680</td><td>Semana 8</td></tr>
+                            <tr><td><strong>#3</strong> P2+P3 en producción</td><td>35%</td><td>$5,152</td><td>Semana 17</td></tr>
+                            <tr><td><strong>#4</strong> Sistema completo + cierre</td><td>30%</td><td>$4,416</td><td>Semana 26</td></tr>
+                            <tr style="border-top:2px solid var(--primary); background:#eff6ff;"><td style="font-weight:800;">TOTAL</td><td style="font-weight:800;">100%</td><td class="price-total">$14,720</td><td></td></tr>
                         </tbody>
                     </table>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
                         <div>
-                            <h4 style="color: var(--success); margin-bottom: 0.5rem;">✅ Incluye</h4>
-                            <ul class="feature-list" style="font-size: 0.9rem;">
-                                <li>359 horas desarrollo</li>
-                                <li>Sistema completo (proformas + pedidos)</li>
-                                <li>3 meses soporte post-lanzamiento</li>
-                                <li>Documentación y Videos</li>
-                                <li>Capacitación equipo</li>
-                                <li>Dashboard de supervisión</li>
+                            <h4 style="color:var(--success); margin-bottom:0.5rem;">✅ Incluye</h4>
+                            <ul class="feature-list" style="font-size:0.9rem;">
+                                <li>368 horas de desarrollo especializado</li>
+                                <li>7 procesos automatizados (ciclo completo)</li>
+                                <li>3 meses soporte post-entrega</li>
+                                <li>Documentación técnica y manual de usuario</li>
+                                <li>Capacitación del equipo Sorimex</li>
+                                <li>Código fuente completo en Git</li>
                             </ul>
                         </div>
                         <div>
-                            <h4 style="color: var(--danger); margin-bottom: 0.5rem;">❌ No Incluye</h4>
-                            <ul class="feature-list" style="font-size: 0.9rem;">
-                                <li>Migración PostgreSQL (Fase 4 opcional)</li>
-                                <li>WhatsApp Business (Fase 4 opcional)</li>
-                                <li>Funcionalidades fuera de alcance</li>
-                                <li>Soporte extendido (>3 meses)</li>
+                            <h4 style="color:var(--danger); margin-bottom:0.5rem;">❌ No incluye</h4>
+                            <ul class="feature-list" style="font-size:0.9rem;">
+                                <li>Fase 4 / P8–P10 (cotización separada)</li>
+                                <li>Migración a PostgreSQL (opcional futuro)</li>
+                                <li>WhatsApp Business (opcional futuro)</li>
+                                <li>Soporte extendido más de 3 meses</li>
                             </ul>
                         </div>
                     </div>
@@ -847,126 +308,117 @@
 
             <!-- 7. GARANTÍA -->
             <section id="garantia">
-                <h2 class="section-title">7. Garantía y Reducción de Riesgo</h2>
+                <h2 class="section-title">6. Garantía y Reducción de Riesgo</h2>
                 <div class="card">
-                    <h3 class="subsection-title">Garantía de Satisfacción</h3>
-                    <div class="alert-box" style="background: #ecfdf5; border-color: #10b981;">
-                        <p><strong>Si después de 2 semanas de usar Fase 1 en producción (Semana 16) no están satisfechos
-                                con los resultados, pueden detener el proyecto.</strong></p>
+                    <div class="alert-box" style="background:#ecfdf5; border-color:#10b981;">
+                        <strong>Si tras la primera semana de P1 en producción (Semana 9) no están satisfechos, el proyecto puede detenerse sin obligación de continuar.</strong>
                     </div>
-                    <ul class="feature-list" style="margin-top: 1rem;">
-                        <li>Solo habrán invertido: Fase 0 + Fase 1 = $9,720 USD</li>
-                        <li>No hay obligación de continuar con Fase 2</li>
+                    <ul class="feature-list" style="margin-top:1rem;">
+                        <li>Solo habrán desembolsado: pagos #1 y #2 = $5,152 USD</li>
                         <li>Se entrega todo el código desarrollado hasta ese momento</li>
+                        <li>No hay obligación de continuar con Fases 2, 3 o 4</li>
                     </ul>
-
-                    <h3 class="subsection-title" style="margin-top: 2rem;">Enfoque de Bajo Riesgo</h3>
-                    <p class="p-block"><strong>Nuestro enfoque (Validación Continua):</strong></p>
-                    <ul style="list-style: none; padding-left: 1rem; border-left: 3px solid var(--primary);">
-                        <li>├── $1,650 → Fase 0 → Setup validado</li>
-                        <li>├── $7,425 → Fase 1 → Sistema funcionando (semana 14) <strong>[PUNTO DE DECISIÓN]</strong>
-                        </li>
-                        <li>├── $4,125 → Fase 2 → Solo si Fase 1 cumplió expectativas</li>
-                        <li>└── $3,300 → Cierre → Sistema completo operando</li>
-                    </ul>
+                    <h3 class="subsection-title" style="margin-top:1.5rem;">Flujo de Valor Incremental</h3>
+                    <div style="background:#f8fafc; padding:1.5rem; border-radius:8px; font-family:monospace; font-size:0.88rem; line-height:2;">
+                        $1,472 → Fase 0 → Infraestructura lista<br>
+                        $3,680 → Fase 1 → P1 funcionando <strong>[PUNTO DE CONFIANZA - Sem 8]</strong><br>
+                        $5,152 → Fase 2 → P2+P3 funcionando <strong>[VICTORIA COMERCIAL - Sem 17]</strong><br>
+                        $4,416 → Fase 3+Cierre → Sistema completo <strong>[CICLO COMPLETO - Sem 24]</strong>
+                    </div>
                 </div>
             </section>
 
             <!-- 8. ROI -->
             <section id="roi">
-                <h2 class="section-title">8. Retorno de Inversión (ROI)</h2>
+                <h2 class="section-title">7. Retorno de Inversión</h2>
                 <div class="card">
-                    <h3 class="subsection-title">Ahorro Directo Anual</h3>
-                    <p class="p-block">
-                        <strong>Tiempo ahorrado:</strong> 16.1 horas/mes = 193 horas/año<br>
-                        <strong>Ahorro monetario:</strong> 193h x $20/h = <strong>$3,864/año</strong>
-                    </p>
-
-                    <h3 class="subsection-title" style="margin-top: 1.5rem;">Cálculo de Payback</h3>
                     <div class="comparison-grid">
-                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
-                            <strong>Escenario Conservador</strong>
-                            <br>Ahorro: $8,000 USD/año
-                            <br><strong>Payback: 2.1 años</strong>
+                        <div style="background:#f8fafc; padding:1.5rem; border-radius:8px;">
+                            <strong>Escenario Conservador</strong><br>
+                            Ahorro directo: $8,000 USD/año<br>
+                            <strong>Payback: 1.8 años</strong>
                         </div>
-                        <div
-                            style="background: #f1f5f9; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--success);">
-                            <strong>Escenario Optimista</strong>
-                            <br>Ahorro: $12,000 USD/año
-                            <br><strong>Payback: 1.4 años</strong>
+                        <div style="background:#f1f5f9; padding:1.5rem; border-radius:8px; border:1px solid var(--success);">
+                            <strong>Escenario Optimista</strong><br>
+                            Ahorro directo: $12,000 USD/año<br>
+                            <strong>Payback: 1.2 años</strong>
                         </div>
                     </div>
-                    <p class="p-block" style="margin-top: 1rem; font-style: italic;">
-                        Beneficios adicionales: Respuesta instantánea, Cero errores, Escalabilidad, Satisfacción del
-                        equipo.
-                    </p>
+
+                    <!-- Dato confirmado por Miguel -->
+                    <div style="margin-top:1.5rem; padding:1.25rem 1.5rem; background:#f0fdf4; border-left:4px solid var(--success); border-radius:0 8px 8px 0;">
+                        <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+                            <span style="font-size:1.5rem; line-height:1;">💬</span>
+                            <div>
+                                <p style="font-size:0.88rem; color:#166534; font-style:italic; margin-bottom:0.4rem;">
+                                    "Con el agente funcionando, voy a liberar un <strong>70% de mi tiempo</strong>."
+                                </p>
+                                <p style="font-size:0.78rem; color:#4b5563;">— Miguel Bravo, operaciones Sorimex · estimación propia tras análisis del flujo de trabajo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="p-block" style="margin-top:1.25rem; font-size:0.9rem;">Más allá del ahorro directo cuantificable: respuesta instantánea a clientes, cero errores en cálculos, y un equipo operativo enfocado en trabajo comercial y estratégico.</p>
                 </div>
             </section>
 
             <!-- 9. COMPARATIVA -->
             <section id="comparativa">
-                <h2 class="section-title">9. Comparativa con Alternativas</h2>
+                <h2 class="section-title">8. Comparativa con Alternativas</h2>
                 <div class="comparison-grid">
-                    <div class="card" style="opacity: 0.8;">
-                        <strong>Opción A: Manual</strong>
-                        <p style="color: var(--danger);">✗ Costo anual: $4,600 - $8,000</p>
-                        <p style="color: var(--danger);">✗ No escalable, errores humanos</p>
+                    <div class="card" style="opacity:0.8;">
+                        <strong>Proceso manual actual</strong>
+                        <p style="color:var(--danger); margin-top:0.5rem;">✗ Costo anual: $4,600–$8,000</p>
+                        <p style="color:var(--danger);">✗ No escala, errores, dependencia personal</p>
                     </div>
-                    <div class="card" style="opacity: 0.8;">
-                        <strong>Opción C: Agencia</strong>
-                        <p style="color: var(--danger);">✗ Costo: $30k - $50k</p>
-                        <p style="color: var(--danger);">✗ Overhead excesivo</p>
+                    <div class="card" style="opacity:0.8;">
+                        <strong>Agencia de desarrollo</strong>
+                        <p style="color:var(--danger); margin-top:0.5rem;">✗ Costo: $30k–$50k</p>
+                        <p style="color:var(--danger);">✗ 8–12 meses, overhead, comunicación indirecta</p>
                     </div>
                 </div>
-                <div class="card" style="border: 2px solid var(--primary); background: #eff6ff;">
-                    <strong style="color: var(--primary);">Opción D: Criterio AI</strong>
-                    <ul class="feature-list" style="margin-top: 0.5rem;">
-                        <li>✅ Costo: $16,500 USD</li>
-                        <li>✅ Duración: 5.5 meses</li>
-                        <li>✅ Expertise especializado (IA + Legacy)</li>
-                        <li>✅ Comunicación directa</li>
+                <div class="card" style="border:2px solid var(--primary); background:#eff6ff; margin-top:1rem;">
+                    <strong style="color:var(--primary);">Criterio AI — Propuesta</strong>
+                    <ul class="feature-list" style="margin-top:0.75rem;">
+                        <li>✅ $14,720 contrato inicial · $40/h · 368h</li>
+                        <li>✅ Primera victoria semana 8 — no al final del proyecto</li>
+                        <li>✅ Expertise IA + sistemas legacy (Access/VBA 25 años)</li>
+                        <li>✅ Comunicación directa, sin intermediarios</li>
+                        <li>✅ Pagos alineados con valor entregado</li>
                     </ul>
                 </div>
             </section>
 
             <!-- 10. PRÓXIMOS PASOS -->
             <section id="steps">
-                <h2 class="section-title">10. Próximos Pasos</h2>
+                <h2 class="section-title">9. Próximos Pasos</h2>
                 <div class="card">
-                    <ol class="step-list" style="margin-left: 1.5rem;">
-                        <li><strong>Evaluación Interna (Semana 1):</strong> Socializar propuesta, evaluar presupuesto.
-                        </li>
-                        <li><strong>Reunión de Alineación (Semana 2):</strong> Revisión preguntas, ajustes finales.</li>
-                        <li><strong>Firma y Kickoff (Semana 3):</strong> Contrato, NDA, entrega de accesos, Inicio Fase
-                            0.</li>
+                    <ol class="step-list" style="margin-left:1.5rem;">
+                        <li><strong>Evaluación Interna:</strong> Socializar propuesta con equipo y consultor. Evaluar presupuesto.</li>
+                        <li><strong>Reunión de Alineación:</strong> Revisión de preguntas, ajustes de alcance si necesario.</li>
+                        <li><strong>Firma y Kickoff:</strong> Contrato, NDA, entrega de accesos. Inicio Fase 0 semana 1.</li>
                     </ol>
                 </div>
             </section>
 
             <!-- 11. CONTACTO -->
             <section id="contacto">
-                <h2 class="section-title">11. Contacto</h2>
-                <div class="card"
-                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+                <h2 class="section-title">10. Contacto</h2>
+                <div class="card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem;">
                     <div>
-                        <h3 style="margin-bottom: 0.5rem;">Criterio AI</h3>
-                        <p style="color: var(--text-muted);">Especialistas en modernización de sistemas legacy con IA.
-                        </p>
-                        <div style="margin-top: 1.5rem;">
+                        <h3 style="margin-bottom:0.5rem;">Criterio AI</h3>
+                        <p style="color:var(--text-muted);">Especialistas en modernización de sistemas legacy con IA.</p>
+                        <div style="margin-top:1.5rem;">
                             <strong>Hernando Gaitán Díaz</strong><br>
-                            Link a: <a href="anexos.html" style="color: var(--primary);">Sustentación Técnica</a> | <a
-                                href="cronograma.html" style="color: var(--primary);">Cronograma</a>
+                            <a href="anexos.html" style="color:var(--primary);">Sustentación Técnica</a> · <a href="cronograma.html" style="color:var(--primary);">Cronograma</a> · <a href="expansion.html" style="color:var(--primary);">Expansión</a>
                         </div>
                     </div>
-                    <div style="text-align: right;">
+                    <div style="text-align:right;">
                         <p>📧 hernandogaitandiaz@gmail.com</p>
                         <p>📱 +57 320 837 9165</p>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Lunes a Viernes:
-                            9:00 - 18:00 (Chile)</p>
-                        <div style="margin-top: 1.5rem;">
-                            <a href="orden_servicio.html" target="_blank"
-                                style="color: var(--primary); font-weight: 600; text-decoration: underline;">Ver Orden
-                                de Servicio (Imprimible)</a>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">Lunes a Viernes: 9:00–18:00 (Chile)</p>
+                        <div style="margin-top:1.5rem;">
+                            <a href="orden_servicio.html" target="_blank" style="color:var(--primary); font-weight:600; text-decoration:underline;">Ver Orden de Servicio (Imprimible)</a>
                         </div>
                     </div>
                 </div>
@@ -976,18 +428,17 @@
     </main>
 
     <footer class="footer">
-        <div class="nav-container" style="flex-direction: column;">
+        <div class="nav-container" style="flex-direction:column;">
             <h2>CRITERIO AI</h2>
-            <p style="opacity: 0.7;">Agente IA para Automatización de Procesos Sorimex</p>
+            <p style="opacity:0.7;">Agente IA para Automatización de Operaciones Sorimex</p>
             <div class="footer-links">
                 <a href="#">Propuesta</a>
                 <a href="cronograma.html">Cronograma</a>
                 <a href="anexos.html">Sustentación Técnica</a>
+                <a href="expansion.html">Expansión</a>
             </div>
-            <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.5;">© 2026 Criterio AI. Confidencial.</p>
+            <p style="margin-top:2rem; font-size:0.8rem; opacity:0.5;">© 2026 Criterio AI. Confidencial.</p>
         </div>
     </footer>
-
 </body>
-
 </html>

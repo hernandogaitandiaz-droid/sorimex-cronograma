@@ -1,130 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orden de Servicio - Criterio AI</title>
     <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 1.5;
-            color: #000;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            background: #fff;
-        }
-
-        .header {
-            border-bottom: 2px solid #000;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .meta {
-            font-size: 14px;
-        }
-
-        .section {
-            margin-bottom: 25px;
-        }
-
-        .section-title {
-            font-weight: bold;
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f9f9f9;
-        }
-
-        .total-row td {
-            font-weight: bold;
-            border-top: 2px solid #000;
-        }
-
-        .signatures {
-            margin-top: 60px;
-            display: flex;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .sig-block {
-            width: 45%;
-            border-top: 1px solid #000;
-            padding-top: 10px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .print-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-        }
-
-        .back-link {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            text-decoration: none;
-            color: #666;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        @media print {
-
-            .print-btn,
-            .back-link {
-                display: none;
-            }
-
-            body {
-                padding: 0;
-            }
-        }
+        body { font-family: 'Times New Roman', Times, serif; line-height: 1.5; color: #000; max-width: 800px; margin: 0 auto; padding: 40px; background: #fff; }
+        .header { border-bottom: 2px solid #000; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .title { font-size: 24px; font-weight: bold; text-transform: uppercase; }
+        .meta { font-size: 14px; }
+        .section { margin-bottom: 25px; }
+        .section-title { font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 10px; padding-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; text-transform: uppercase; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f9f9f9; }
+        .total-row td { font-weight: bold; border-top: 2px solid #000; }
+        .subtotal-row td { font-style: italic; border-top: 1px solid #aaa; background: #f9f9f9; }
+        .optional-row td { color: #555; font-style: italic; }
+        .signatures { margin-top: 60px; display: flex; justify-content: space-between; gap: 40px; }
+        .sig-block { width: 45%; border-top: 1px solid #000; padding-top: 10px; text-align: center; font-size: 14px; }
+        .print-btn { position: fixed; top: 20px; right: 20px; background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif; font-weight: bold; }
+        .back-link { position: fixed; top: 20px; left: 20px; text-decoration: none; color: #666; font-family: Arial, sans-serif; font-size: 14px; }
+        .note { font-size: 12px; color: #444; font-style: italic; margin-top: 6px; }
+        @media print { .print-btn, .back-link { display: none; } body { padding: 0; } }
     </style>
 </head>
-
 <body>
     <a href="index.html" class="back-link">← Volver a Propuesta</a>
     <button onclick="window.print()" class="print-btn">Imprimir / Guardar PDF</button>
@@ -132,120 +32,98 @@
     <div class="header">
         <div>
             <div class="title">Criterio AI</div>
-            <div style="font-size: 12px; margin-top: 5px;">Hernando Gaitán Díaz</div>
+            <div style="font-size:12px; margin-top:5px;">Hernando Gaitán Díaz</div>
         </div>
-        <div class="meta" style="text-align: right;">
+        <div class="meta" style="text-align:right;">
             <strong>ORDEN DE SERVICIO</strong><br>
             Ref: SORIMEX-IA-001<br>
-            Fecha: 15 de Febrero, 2026
+            Fecha: Marzo 2026
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title">Clientes</div>
+        <div class="section-title">Cliente</div>
         <p><strong>Empresa:</strong> SORIMEX S.A.<br>
-            <strong>Atención:</strong> Gerencia General / Gerencia Comercial
-        </p>
+        <strong>Atención:</strong> Gerencia General / Gerencia Comercial</p>
     </div>
 
     <div class="section">
-        <div class="section-title">Alcance del Servicio</div>
-        <p>Desarrollo e implementación de Agente de IA para automatización de proformas y pedidos.</p>
-        <ul>
-            <li><strong>Fase 0 (Setup):</strong> Configuración de entorno y accesos.</li>
-            <li><strong>Fase 1 (MVP):</strong> Agente para proformas, lectura Access, generación PDF, Email.</li>
-            <li><strong>Fase 2 (Completo):</strong> Agente para pedidos, integración completa (Sujeto a aprobación Fase
-                1).</li>
+        <div class="section-title">Alcance del Servicio — Contrato Inicial</div>
+        <p>Desarrollo e implementación de Agente IA para automatización del ciclo operativo completo de importación.</p>
+        <ul style="margin-top:10px; font-size:14px; line-height:1.8;">
+            <li><strong>Fase 0 (Setup, Sem 1–3):</strong> Infraestructura, accesos, arquitectura base.</li>
+            <li><strong>Fase 1 (Estatus semanal, Sem 4–8):</strong> P1 — Actualización automática de estatus de pedidos + correos a clientes. <em>Primera victoria: semana 8.</em></li>
+            <li><strong>Fase 2 (Proformas y pedidos, Sem 9–17):</strong> P2 — Crear proforma; P3 — Generar pedido desde proforma. <em>Segunda victoria: semana 17.</em></li>
+            <li><strong>Fase 3 (Ciclo completo, Sem 18–24):</strong> P4 — Registrar factura; P5 — Registrar llegada; P6 — Registrar remesa; P7 — Cierre de pedido + notificación cliente. <em>Sistema completo: semana 24.</em></li>
+            <li><strong>Cierre (Sem 25–26):</strong> Documentación, capacitación, entrega código.</li>
         </ul>
+        <p class="note">* La Fase 4 (P8–P10: consultas, alertas, fichas de cliente) es opcional y se cotiza por separado (+$1,680 USD).</p>
     </div>
 
     <div class="section">
-        <div class="section-title">Inversión y Términos Económicos</div>
+        <div class="section-title">Inversión — Desglose por Proceso</div>
         <table>
             <thead>
                 <tr>
-                    <th>Concepto</th>
-                    <th>Valor (USD)</th>
+                    <th>Proceso</th>
+                    <th style="width:70px;">Horas</th>
+                    <th style="width:110px;">Valor (USD)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Fase 0: Pre-requisitos y Setup</td>
-                    <td>$1,125</td>
-                </tr>
-                <tr>
-                    <td>Fase 1: Agente + Proformas (MVP)</td>
-                    <td>$8,595</td>
-                </tr>
-                <tr>
-                    <td>Fase 2: Pedidos (Opcional según desempeño Fase 1)</td>
-                    <td>$3,825</td>
-                </tr>
-                <tr>
-                    <td>Cierre y Documentación</td>
-                    <td>$495</td>
-                </tr>
-                <tr>
-                    <td>Contingencia / Buffer</td>
-                    <td>$2,460</td>
-                </tr>
-                <tr class="total-row">
-                    <td>TOTAL PROYECTO</td>
-                    <td>$16,500 USD</td>
-                </tr>
+                <tr><td>P1 — Actualizar estatus semanal de pedidos</td><td>59h</td><td>$2,360</td></tr>
+                <tr><td>P2 — Crear proforma</td><td>88h</td><td>$3,520</td></tr>
+                <tr><td>P3 — Generar pedido desde proforma</td><td>40h</td><td>$1,600</td></tr>
+                <tr><td>P4 — Registrar factura de proveedor</td><td>21h</td><td>$840</td></tr>
+                <tr><td>P5 — Registrar llegada de mercadería</td><td>36h</td><td>$1,440</td></tr>
+                <tr><td>P6 — Registrar remesa (pago de factura)</td><td>17h</td><td>$680</td></tr>
+                <tr><td>P7 — Cierre de pedido + notificación cliente</td><td>21h</td><td>$840</td></tr>
+                <tr><td>Overhead fijo (setup, integración, testing, documentación)</td><td>86h</td><td>$3,440</td></tr>
+                <tr class="subtotal-row"><td>Subtotal contrato inicial</td><td>368h</td><td>$14,720</td></tr>
+                <tr class="optional-row"><td>Fase 4 opcional: P8–P10 (consultas, alertas, fichas)</td><td>42h</td><td>$1,680</td></tr>
+                <tr class="total-row"><td>TOTAL CON EXPANSIÓN (si aplica)</td><td>410h</td><td>$16,400 USD</td></tr>
             </tbody>
         </table>
+        <p class="note">Tasa: $40 USD/hora · ~3 horas de trabajo diario · Total contrato inicial: <strong>$14,720 USD</strong></p>
     </div>
 
     <div class="section">
-        <div class="section-title">Esquema de Pagos</div>
+        <div class="section-title">Esquema de Pagos — Contrato Inicial</div>
         <table>
             <thead>
-                <tr>
-                    <th>Hito</th>
-                    <th>%</th>
-                    <th>Monto (USD)</th>
-                    <th>Condición</th>
-                </tr>
+                <tr><th>Hito</th><th>%</th><th>Monto (USD)</th><th>Condición</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1. Firma / Inicio</td>
-                    <td>10%</td>
-                    <td>$1,650</td>
-                    <td>Inmediato</td>
-                </tr>
-                <tr>
-                    <td>2. Aprobación Fase 1</td>
-                    <td>45%</td>
-                    <td>$7,425</td>
-                    <td>Semana 13</td>
-                </tr>
-                <tr>
-                    <td>3. Aprobación Fase 2</td>
-                    <td>25%</td>
-                    <td>$4,125</td>
-                    <td>Semana 20</td>
-                </tr>
-                <tr>
-                    <td>4. Cierre y Entrega</td>
-                    <td>20%</td>
-                    <td>$3,300</td>
-                    <td>Semana 22</td>
-                </tr>
+                <tr><td>1. Firma / Inicio</td><td>10%</td><td>$1,472</td><td>Inmediato al firmar</td></tr>
+                <tr><td>2. P1 en producción (Miguel)</td><td>25%</td><td>$3,680</td><td>Semana 8</td></tr>
+                <tr><td>3. P2+P3 en producción</td><td>35%</td><td>$5,152</td><td>Semana 17</td></tr>
+                <tr><td>4. Sistema completo + cierre</td><td>30%</td><td>$4,416</td><td>Semana 26</td></tr>
+                <tr class="total-row"><td>TOTAL</td><td>100%</td><td>$14,720 USD</td><td></td></tr>
             </tbody>
         </table>
+        <p class="note">* Si se activa Fase 4, se agrega un pago adicional de $1,680 USD al iniciar dicha fase (Sem 27).</p>
     </div>
 
     <div class="section">
         <div class="section-title">Garantía de Satisfacción</div>
-        <p style="font-size: 13px; font-style: italic;">
-            Si tras la finalización de la Fase 1 (Semana 16) el cliente no está satisfecho con el desempeño del sistema
-            en producción,
-            el proyecto puede darse por terminado sin obligación de continuar con la Fase 2 ni los pagos restantes (#3 y
-            #4),
+        <p style="font-size:13px; font-style:italic;">
+            Si tras la primera semana de uso de P1 en producción (Semana 9) el cliente no está satisfecho con el desempeño del sistema,
+            el proyecto puede detenerse sin obligación de continuar con las fases siguientes,
             entregándose todo el código fuente desarrollado hasta la fecha.
+            Solo se habrán desembolsado los pagos de los hitos 1 y 2 ($5,152 USD).
         </p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Incluye</div>
+        <ul style="font-size:13px; line-height:1.8;">
+            <li>368 horas de desarrollo especializado (Python, IA, Access)</li>
+            <li>7 procesos automatizados del ciclo completo de importación</li>
+            <li>3 meses de soporte post-entrega (sistema en producción)</li>
+            <li>Documentación técnica y manual de usuario</li>
+            <li>Capacitación del equipo Sorimex</li>
+            <li>Código fuente completo en repositorio Git</li>
+        </ul>
     </div>
 
     <div class="signatures">
@@ -262,7 +140,5 @@
             Consultor Líder
         </div>
     </div>
-
 </body>
-
 </html>
