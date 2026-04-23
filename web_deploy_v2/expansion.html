@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expansión y Visión de Plataforma | Agente IA Sorimex</title>
+    <style>
+        :root {
+            --primary: #1B3A6B; --primary-light: #2E75B6;
+            --fase4: #6366f1; --ola1: #1E7145; --ola2: #C65911; --ola3: #7030A0;
+            --bg-body: #f8fafc; --bg-card: #ffffff; --text-main: #0f172a;
+            --text-muted: #475569; --border: #e2e8f0; --radius: 8px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+
+        header { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+        .nav-container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .brand { font-weight: 800; color: var(--primary-light); font-size: 1.25rem; text-decoration: none; }
+        .nav-menu { display: flex; gap: 1.5rem; }
+        .nav-link { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.9rem; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-light); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .section-header { border-bottom: 2px solid var(--primary-light); padding-bottom: 0.5rem; margin: 2rem 0 1rem; color: var(--primary); text-transform: uppercase; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; }
+        h1 { font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem; }
+        .intro-text { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+        /* Banner de bloque */
+        .block-banner { padding: 0.75rem 1.5rem; color: white; font-weight: 700; border-radius: 4px; margin: 2rem 0 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .block-banner.fase4   { background-color: var(--fase4); }
+        .block-banner.ola1    { background-color: var(--ola1); }
+        .block-banner.ola2    { background-color: var(--ola2); }
+        .block-banner.ola3    { background-color: var(--ola3); }
+
+        table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; background: white; font-size: 0.95rem; }
+        th { background-color: var(--primary); color: white; padding: 0.75rem 1rem; text-align: left; font-weight: 600; border: 1px solid #ddd; }
+        td { padding: 0.75rem 1rem; border: 1px solid #ddd; vertical-align: top; }
+
+        .evolution-table th { text-align: center; }
+        .evolution-table td { text-align: center; font-weight: 500; }
+
+        .tag { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; display: inline-block; }
+        .tag-low    { background-color: #e6f4ea; color: var(--ola1); }
+        .tag-medium { background-color: #fff4e5; color: var(--ola2); }
+        .tag-high   { background-color: #f3e8fd; color: var(--ola3); }
+        .tag-incl   { background-color: #eef2ff; color: var(--fase4); }
+
+        .impact-stars { color: var(--ola1); font-weight: bold; }
+
+        .note-box { background: #f1f5f9; padding: 1.5rem; border-left: 4px solid var(--primary-light); margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); }
+        .note-box.fase4-note { background: #eef2ff; border-left-color: var(--fase4); }
+
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; margin-top: 4rem; border-top: 1px solid var(--border); }
+
+        .color-fase4 { background-color: #f0f0ff; }
+        .color-ola1  { background-color: #f0fdf4; }
+        .color-ola2  { background-color: #fffaf0; }
+        .color-ola3  { background-color: #faf5ff; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand">CRITERIO AI</a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Propuesta</a>
+                <a href="cronograma.html" class="nav-link">Cronograma</a>
+                <a href="anexos.html" class="nav-link">Sustentación Técnica</a>
+                <a href="#" class="nav-link active">Expansión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="section-header">SECCIÓN 6</div>
+        <h1>Visión de Plataforma y Expansión</h1>
+
+        <div class="intro-text">
+            <p>Lo que se construye en este proyecto no es una herramienta de automatización puntual. Es la base de una <strong>plataforma de inteligencia operacional</strong> sobre el sistema Sorimex.</p>
+            <p style="margin-top:1rem;">Esta sección distingue dos horizontes: la <strong>Fase 4 incluida en el contrato</strong> (P8–P10, opcionales pero presupuestados), y las <strong>Olas de expansión futura</strong> que representan el crecimiento natural de la plataforma.</p>
+        </div>
+
+        <!-- Tabla de evolución -->
+        <div class="section-header">Evolución del Agente</div>
+        <table class="evolution-table">
+            <thead>
+                <tr>
+                    <th style="background-color:var(--primary-light);">CONTRATO<br>(Fases 0–3)</th>
+                    <th style="background-color:var(--fase4);">FASE 4<br>(Opcional · Contrato)</th>
+                    <th style="background-color:var(--ola1);">OLA 1<br>(Expansión futura)</th>
+                    <th style="background-color:var(--ola2);">OLA 2<br>(Expansión futura)</th>
+                    <th style="background-color:var(--ola3);">OLA 3<br>(Expansión futura)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="color:var(--primary-light);">Agente Transaccional</td>
+                    <td style="color:var(--fase4);">Agente Consultivo Básico</td>
+                    <td style="color:var(--ola1);">Agente Consultivo Avanzado</td>
+                    <td style="color:var(--ola2);">Agente Operacional</td>
+                    <td style="color:var(--ola3);">Agente Estratégico</td>
+                </tr>
+                <tr style="font-size:0.83rem; color:var(--text-muted);">
+                    <td>P1–P7: Ciclo completo de importación automatizado</td>
+                    <td>Consultas, alertas automáticas, fichas de cliente</td>
+                    <td>Análisis histórico y cobranza conversacional</td>
+                    <td>Procesa documentos externos, notifica clientes</td>
+                    <td>Proyecciones, rentabilidad, presupuesto</td>
+                </tr>
+                <tr style="font-size:0.8rem; font-weight:700;">
+                    <td style="background:#eff6ff;">~72% del esfuerzo total</td>
+                    <td style="background:#eef2ff;">~10% del esfuerzo total</td>
+                    <td style="background:#f0fdf4;">~5% adicional</td>
+                    <td style="background:#fffaf0;">~8% adicional</td>
+                    <td style="background:#faf5ff;">~5% adicional</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- FASE 4 — EN CONTRATO -->
+        <div class="block-banner fase4">FASE 4 — INCLUIDA EN CONTRATO (OPCIONAL) · 42h · $1,680 USD</div>
+        <p class="intro-text" style="font-size:0.95rem;">Estos tres procesos están presupuestados dentro del contrato inicial como expansión opcional. Se activan en las semanas 27–30 si Sorimex aprueba continuar. Son casi gratuitos porque reutilizan completamente la infraestructura ya construida en Fases 1–3.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Proceso</th>
+                    <th>Descripción</th>
+                    <th style="width:120px;">Esfuerzo</th>
+                    <th style="width:120px;">Impacto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="color-fase4">
+                    <td><strong>P8 — Consulta de estatus (lenguaje natural)</strong></td>
+                    <td>"¿Cómo va el pedido SXP-008-26?" → respuesta inmediata. Reutiliza 100% la infraestructura de P1. Sin escritura en Access.</td>
+                    <td><span class="tag tag-incl">Incluido</span></td>
+                    <td><span class="impact-stars" style="color:var(--fase4);">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-fase4">
+                    <td><strong>P9 — Alertas automáticas de pedidos vencidos</strong></td>
+                    <td>Revisión diaria: detecta pedidos con fecha estimada superada. Envía resumen proactivo a Miguel (o Mauricio). Sin solicitud previa.</td>
+                    <td><span class="tag tag-incl">Incluido</span></td>
+                    <td><span class="impact-stars" style="color:var(--fase4);">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-fase4">
+                    <td><strong>P10 — Ficha de cliente para reunión</strong></td>
+                    <td>"Dame ficha de EMPROQUIM antes de la reunión" → historial, volumen FOB, productos frecuentes, condiciones de pago, estado de cobranza.</td>
+                    <td><span class="tag tag-incl">Incluido</span></td>
+                    <td><span class="impact-stars" style="color:var(--fase4);">★★★ Alto</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box fase4-note">
+            <strong>Por qué P8–P10 son casi gratuitos:</strong> Los tres procesos son 100% lectura sobre tablas ya mapeadas en Fases anteriores (PEDFIL, PEDEST, CLIFIL, FPFFIL, TESFIL). No requieren escribir en Access. P8 y P10 no tienen ninguna operación nueva; P9 solo añade el envío proactivo. El costo de $1,680 corresponde al tiempo de orquestación y pruebas, no a desarrollo de nueva lógica.
+        </div>
+
+        <!-- OLA 1 -->
+        <div class="block-banner ola1" style="margin-top:3rem;">OLA 1 — EXPANSIÓN FUTURA · ALTO IMPACTO · BAJA COMPLEJIDAD</div>
+        <p class="intro-text" style="font-size:0.95rem;">Funciones que se apoyan en los datos ya mapeados. Valor inmediato con mínimo desarrollo adicional. Se presupuestan por separado según prioridad de Sorimex.</p>
+
+        <table>
+            <thead><tr><th>Función</th><th>Descripción</th><th style="width:120px;">Esfuerzo</th><th style="width:120px;">Impacto</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Resumen ejecutivo de cobranza</strong></td>
+                    <td>Facturas próximas a vencer o vencidas. Seguimiento proactivo sin abrir Access. Para Mauricio o Miguel.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-ola2">
+                    <td><strong>Análisis histórico por proveedor</strong></td>
+                    <td>Ventas reales vs presupuesto, evolución mensual, comparativo anual. Versión conversacional del informe de ventas.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color:var(--ola2);">★★ Medio</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- OLA 2 -->
+        <div class="block-banner ola2">OLA 2 — EXPANSIÓN FUTURA · ALTO IMPACTO · COMPLEJIDAD MEDIA</div>
+        <p class="intro-text" style="font-size:0.95rem;">Requieren procesamiento de documentos externos — el componente nuevo más significativo. Se apoyan en la misma infraestructura base.</p>
+
+        <table>
+            <thead><tr><th>Función</th><th>Descripción</th><th style="width:120px;">Esfuerzo</th><th style="width:120px;">Impacto</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Procesamiento de documentos externos</strong></td>
+                    <td>Extracción de datos de avisos de llegada, facturas de proveedor y OCs de clientes.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color:var(--ola2);">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Módulo de normalización de formatos</strong></td>
+                    <td>Aprende a mapear campos de formatos desconocidos para procesamiento automático futuro.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color:var(--ola2);">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Registro automatizado de llegadas</strong></td>
+                    <td>Actualiza DETEST y saldos con confirmación previa. Elimina transcripción manual de documentos navieros.</td>
+                    <td><span class="tag tag-medium">Medio</span></td>
+                    <td><span class="impact-stars" style="color:var(--ola2);">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-ola1">
+                    <td><strong>Pre-generación de proformas desde OC</strong></td>
+                    <td>Interpreta orden de compra del cliente y propone proforma pre-completada para revisión.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★★★ Alto</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- OLA 3 -->
+        <div class="block-banner ola3">OLA 3 — EXPANSIÓN FUTURA · IMPACTO ESTRATÉGICO · MAYOR DESARROLLO</div>
+        <p class="intro-text" style="font-size:0.95rem;">Transforman al agente en instrumento de inteligencia de negocio. Requieren modelado sobre los 25 años de historial.</p>
+
+        <table>
+            <thead><tr><th>Función</th><th>Descripción</th><th style="width:120px;">Esfuerzo</th><th style="width:120px;">Impacto</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Análisis de rentabilidad comercial</strong></td>
+                    <td>Cruza FOB, comisiones y ciclos para identificar relaciones proveedor-cliente de mayor valor neto.</td>
+                    <td><span class="tag tag-high">Alto</span></td>
+                    <td><span class="impact-stars" style="color:var(--ola3);">★★★ Alto</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Proyección de flujo de cobranza</strong></td>
+                    <td>Basado en pedidos vigentes y condiciones de pago, proyecta ingresos de tesorería próximos.</td>
+                    <td><span class="tag tag-high">Alto</span></td>
+                    <td><span class="impact-stars" style="color:var(--ola3);">★★★ Alto</span></td>
+                </tr>
+                <tr class="color-ola1">
+                    <td><strong>Detección de productos sin movimiento</strong></td>
+                    <td>Identifica productos del catálogo sin presencia en proformas recientes. Útil para decisiones de portafolio.</td>
+                    <td><span class="tag tag-low">Bajo</span></td>
+                    <td><span class="impact-stars">★ Moderado</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Asistente de presupuesto anual</strong></td>
+                    <td>Sugiere presupuestos por proveedor basados en historial estadístico de ventas reales.</td>
+                    <td><span class="tag tag-high">Alto</span></td>
+                    <td><span class="impact-stars" style="color:var(--ola3);">★★★ Alto</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <strong>Nota sobre la expansión:</strong> La Fase 4 (P8–P10) está presupuestada dentro del contrato actual y puede activarse directamente. Las Olas 1, 2 y 3 son genuinamente futuras: se presupuestan por separado según la prioridad que defina Sorimex. El objetivo de esta sección es mostrar que la inversión inicial en infraestructura es la base de una plataforma que crece con el negocio — no el costo de automatizar un proceso puntual.
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Criterio AI. Transformando el legado en futuro.
+    </footer>
+</body>
+</html>
