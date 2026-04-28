@@ -108,9 +108,9 @@
 
     <main>
         <section class="hero">
-            <span class="badge">PROPUESTA COMERCIAL v2.0 · Marzo 2026</span>
+            <span class="badge">PROPUESTA COMERCIAL v3.0 · Abril 2026</span>
             <h1>Agente IA para Automatización<br>de Operaciones Sorimex</h1>
-            <p>7 procesos automatizados. Primera victoria en semana 8. Sistema completo en semana 24.</p>
+            <p>7 procesos automatizados. Primera victoria en semana 9. Sistema completo en semana 24.</p>
             <div style="display:flex; justify-content:center; gap:1rem;">
                 <a href="#inversion" class="btn-cta" style="padding:0.75rem 1.5rem; font-size:1rem;">Ver Inversión</a>
                 <a href="anexos.html" class="nav-link" style="border:1px solid var(--border); padding:0.75rem 1.5rem; border-radius:6px; background:white;">Ver Análisis Técnico</a>
@@ -124,11 +124,11 @@
                 <h2 class="section-title">1. Resumen Ejecutivo</h2>
                 <div class="card">
                     <p class="p-block">El equipo de Sorimex dedica tiempo valioso a <strong>7 procesos operativos repetitivos</strong> que pueden automatizarse completamente: desde la actualización semanal de estatus de pedidos hasta el cierre y notificación al cliente.</p>
-                    <p class="p-block"><strong>Proponemos un agente conversacional con Inteligencia Artificial</strong> que automatiza estos 7 procesos de forma incremental, entregando valor desde la semana 8 — no al final del proyecto.</p>
+                    <p class="p-block"><strong>Proponemos un agente conversacional con Inteligencia Artificial</strong> que automatiza estos 7 procesos de forma incremental, entregando valor desde la semana 9 — no al final del proyecto.</p>
 
                     <h3 class="subsection-title" style="margin-top:1.5rem;">Beneficios Clave</h3>
                     <ul class="feature-list">
-                        <li><strong>Primera victoria en semana 8:</strong> Miguel elimina el proceso manual de estatus semanal</li>
+                        <li><strong>Primera victoria en semana 9:</strong> Mauricio y Miguel crean proformas conversacionalmente</li>
                         <li><strong>Reducción del 87% en tiempo</strong> por proforma y pedido</li>
                         <li><strong>Cero errores</strong> en cálculos FOB, peso bruto y embalajes</li>
                         <li><strong>Ciclo completo automatizado</strong> en semana 24</li>
@@ -138,16 +138,16 @@
                     <h3 class="subsection-title" style="margin-top:1.5rem;">Inversión y Retorno</h3>
                     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-top:1rem;">
                         <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
-                            <span style="font-size:1.6rem; font-weight:800; color:var(--primary); display:block;">$14,720</span>
-                            <span style="font-size:0.82rem; color:var(--text-muted);">Inversión contrato inicial</span>
+                            <span style="font-size:1.6rem; font-weight:800; color:var(--primary); display:block;">$4,480</span>
+                            <span style="font-size:0.82rem; color:var(--text-muted);">Contrato 1 (Fase 0 + P2)</span>
                         </div>
                         <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
-                            <span style="font-size:1.6rem; font-weight:800; color:var(--success); display:block;">Sem 8</span>
+                            <span style="font-size:1.6rem; font-weight:800; color:var(--success); display:block;">Sem 9</span>
                             <span style="font-size:0.82rem; color:var(--text-muted);">Primera victoria en producción</span>
                         </div>
                         <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
-                            <span style="font-size:1.6rem; font-weight:800; color:var(--text-main); display:block;">23 sem</span>
-                            <span style="font-size:0.82rem; color:var(--text-muted);">Duración contrato inicial</span>
+                            <span style="font-size:1.6rem; font-weight:800; color:var(--text-main); display:block;">26 sem</span>
+                            <span style="font-size:0.82rem; color:var(--text-muted);">Duración total del proyecto</span>
                         </div>
                         <div style="background:#f1f5f9; padding:1.2rem; border-radius:8px; text-align:center;">
                             <span style="font-size:1.6rem; font-weight:800; color:var(--warning); display:block;">1.5–2.3</span>
@@ -186,64 +186,94 @@
                 </div>
             </section>
 
+            <!-- 3. PROCESOS -->
+            <section id="procesos">
+                <h2 class="section-title">3. Procesos Automatizados</h2>
+                <div class="card">
+                    <p class="p-block">El agente automatiza <strong>7 procesos del ciclo operativo de importación</strong>. Cada proceso recibe una instrucción en lenguaje natural vía Telegram y opera directamente sobre Maestro.mdb — sin abrir Access, sin reingreso manual.</p>
+                    <table class="process-table" style="margin-top:1rem;">
+                        <thead>
+                            <tr>
+                                <th style="width:220px;">Proceso</th>
+                                <th>Qué automatiza</th>
+                                <th style="width:120px;">Operador</th>
+                                <th style="width:60px;">Horas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>P2</strong> — Crear proforma</td><td>Instrucción natural → calcula FOB, pesos, embalajes → genera PDF → organiza carpetas → envía borrador al operador para aprobación</td><td>Mauricio / Miguel</td><td>88h</td></tr>
+                            <tr><td><strong>P3</strong> — Generar pedido</td><td>Proforma aceptada → crea pedido completo en Access (PEDNUM, PEDFIL, DOCFIL)</td><td>Comercial</td><td>40h</td></tr>
+                            <tr><td><strong>P1</strong> — Estatus semanal</td><td>Recibe Excel del proveedor → actualiza estado de pedidos en Access → genera borradores de correo para revisión y envío</td><td>Miguel</td><td>59h</td></tr>
+                            <tr><td><strong>P4</strong> — Registrar factura</td><td>Factura del proveedor recibida → registra en Access y vincula al pedido correspondiente</td><td>Miguel</td><td>21h</td></tr>
+                            <tr><td><strong>P5</strong> — Registrar llegada</td><td>Confirmación de llegada de mercadería → actualiza estado del pedido en Access</td><td>Miguel</td><td>36h</td></tr>
+                            <tr><td><strong>P6</strong> — Registrar remesa</td><td>Pago al proveedor → registra remesa y actualiza saldos en Access</td><td>Miguel</td><td>17h</td></tr>
+                            <tr><td><strong>P7</strong> — Cierre de pedido</td><td>Ciclo completado → cierra pedido en Access y envía notificación automática al cliente</td><td>Miguel</td><td>21h</td></tr>
+                            <tr class="subtotal"><td colspan="3"><strong>Total — 7 procesos</strong></td><td><strong>282h</strong></td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.75rem;">Los 282h de desarrollo de procesos se complementan con 86h de overhead (setup, integración, testing, documentación y capacitación) para un total de 368h de proyecto.</p>
+                </div>
+            </section>
+
             <!-- 4. ROADMAP -->
             <section id="roadmap">
-                <h2 class="section-title">3. Roadmap de Implementación</h2>
+                <h2 class="section-title">4. Roadmap de Implementación</h2>
 
                 <div class="phase-card phase-f0">
                     <div class="phase-title">FASE 0 — Setup e Infraestructura · Semanas 1–3</div>
-                    <div class="phase-meta">24h · Entorno Python, accesos servidor, conexión pyodbc, arquitectura, sandbox de Maestro.mdb</div>
-                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$960 USD</span>
+                    <div class="phase-meta">Entorno Python, accesos al servidor, conexión a Maestro.mdb vía pyodbc, arquitectura base, sandbox de desarrollo</div>
                 </div>
 
                 <div class="phase-card phase-f1">
-                    <div class="phase-title">FASE 1 — P1: Actualizar Estatus Semanal · Semanas 4–8</div>
-                    <div class="phase-meta">59h · Recibe Excel del proveedor → actualiza Access → genera ~8 correos a clientes → Miguel los revisa y aprueba antes de enviar</div>
-                    <div class="hito-badge">🚀 Semana 8: Miguel ve resultados — dolor #1 eliminado</div>
-                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$2,360 USD</span>
+                    <div class="phase-title">FASE 1 — P2: Crear Proforma · Semanas 4–9</div>
+                    <div class="phase-meta">Automatización de proformas: instrucción natural → cálculos FOB → PDF idéntico al actual → carpetas + email de borrador para aprobación</div>
+                    <div class="hito-badge">🚀 Semana 9: Mauricio y Miguel crean proformas conversacionalmente</div>
+                </div>
+
+                <div class="alert-box" style="background:#fffbea; border:1px solid #fcd34d; color:#92400e; padding:0.75rem 1rem; border-radius:8px; margin:1rem 0; font-size:0.88rem;">
+                    <strong>Punto de evaluación — Semana 9:</strong> P2 opera de manera aislada. Si los resultados son satisfactorios, se definen y contratan las fases siguientes — ajustando alcances según lo aprendido en esta primera etapa.
                 </div>
 
                 <div class="phase-card phase-f2">
-                    <div class="phase-title">FASE 2 — P2+P3: Proformas y Pedidos · Semanas 9–17</div>
-                    <div class="phase-meta">128h · P2: Crear proforma desde instrucción natural (FOB, PDF, carpetas, email) · P3: Generar pedido desde proforma aceptada (PEDNUM, PEDFIL, DOCFIL)</div>
-                    <div class="hito-badge">🚀 Semana 17: Mauricio y Diego en producción</div>
-                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$5,120 USD</span>
+                    <div class="phase-title">FASE 2 — P3 + P1: Pedidos y Estatus Semanal · Semanas 10–17</div>
+                    <div class="phase-meta">
+                        <strong>P3 (Sem 10–12):</strong> Proforma aceptada → pedido completo en Access (PEDNUM, PEDFIL, DOCFIL)<br>
+                        <strong>P1 (Sem 13–17):</strong> Excel del proveedor → actualización de estatus → borradores de correo para revisión de Miguel
+                    </div>
+                    <div class="hito-badge">🚀 Sem 12: Comercial genera pedidos desde proformas · 🚀 Sem 17: Miguel elimina estatus manual</div>
                 </div>
 
                 <div class="phase-card phase-f3">
                     <div class="phase-title">FASE 3 — P4–P7: Ciclo Completo · Semanas 18–24</div>
-                    <div class="phase-meta">95h · P4: Registrar factura del proveedor · P5: Registrar llegada de mercadería · P6: Registrar remesa (pago) · P7: Cierre de pedido + notificación al cliente</div>
-                    <div class="hito-badge">🚀 Semana 24: Sistema completo — ciclo de importación 100% automatizado</div>
-                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">$3,800 USD</span>
+                    <div class="phase-meta">P4: Registrar factura del proveedor · P5: Registrar llegada de mercadería · P6: Registrar remesa · P7: Cierre de pedido + notificación al cliente</div>
+                    <div class="hito-badge">🚀 Semana 24: Ciclo completo de importación 100% automatizado</div>
                 </div>
 
                 <div class="phase-card phase-cierre">
                     <div class="phase-title">CIERRE — Documentación y Entrega · Semanas 25–26</div>
-                    <div class="phase-meta">86h overhead incluido · Manual de usuario, documentación técnica, capacitación, entrega de código fuente</div>
-                    <span class="badge-info" style="margin-top:0.5rem; display:inline-block;">Incluido en overhead ($3,440)</span>
+                    <div class="phase-meta">Manual de usuario, documentación técnica, capacitación del equipo, entrega de código fuente en repositorio Git</div>
                 </div>
 
                 <div class="phase-card phase-f4">
                     <div class="phase-title">FASE 4 — P8–P10: Expansión · Semanas 27–30 (opcional)</div>
-                    <div class="phase-meta">42h · P8: Consultas de estatus en lenguaje natural · P9: Alertas automáticas de pedidos vencidos · P10: Fichas de cliente para reuniones</div>
-                    <span class="badge-info" style="background:#eef2ff; color:#4338ca; margin-top:0.5rem; display:inline-block;">+$1,680 USD · Se activa si Sorimex aprueba</span>
+                    <div class="phase-meta">P8: Consultas de estatus en lenguaje natural · P9: Alertas automáticas de pedidos vencidos · P10: Fichas de cliente para reuniones · Se activa si Sorimex aprueba al cierre del proyecto</div>
                 </div>
             </section>
 
             <!-- 5. CRONOGRAMA -->
             <section id="cronograma-sec">
-                <h2 class="section-title">4. Cronograma Visual</h2>
+                <h2 class="section-title">5. Cronograma Visual</h2>
                 <div class="card" style="text-align:center;">
-                    <p class="p-block">Gantt interactivo con 26 semanas, 3 victorias en producción y Fase 4 opcional.</p>
+                    <p class="p-block">Gantt interactivo con 26 semanas, 4 victorias en producción y Fase 4 opcional.</p>
                     <a href="cronograma.html" class="btn-cta" style="display:inline-block; margin-top:1rem;">Ver Cronograma Gantt Detallado</a>
                 </div>
             </section>
 
-            <!-- 6. INVERSIÓN -->
+            <!-- 6. ESTRUCTURA CONTRACTUAL -->
             <section id="inversion">
-                <h2 class="section-title">5. Inversión</h2>
+                <h2 class="section-title">6. Estructura Contractual</h2>
                 <div class="card">
-                    <h3 class="subsection-title">Desglose por Proceso — Contrato Inicial</h3>
+                    <h3 class="subsection-title">Correlación Fases — Contratos — Costos</h3>
                     <table class="process-table">
                         <thead>
                             <tr>
@@ -254,30 +284,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>P1 — Actualizar estatus semanal de pedidos</td><td><span class="phase-badge ph1">Fase 1</span></td><td>59h</td><td>$2,360</td></tr>
-                            <tr><td>P2 — Crear proforma</td><td><span class="phase-badge ph2">Fase 2</span></td><td>88h</td><td>$3,520</td></tr>
+                            <tr style="background:#fffbeb;"><td colspan="4" style="font-weight:700; color:#92400e; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em;">CONTRATO 1 — Fase 0 + Fase 1</td></tr>
+                            <tr><td>Fase 0 — Setup e infraestructura</td><td><span class="phase-badge ph0">Fase 0</span></td><td>24h</td><td>$960</td></tr>
+                            <tr><td>P2 — Crear proforma</td><td><span class="phase-badge ph1">Fase 1</span></td><td>88h</td><td>$3,520</td></tr>
+                            <tr class="subtotal"><td colspan="2"><strong>Subtotal Contrato 1</strong></td><td><strong>112h</strong></td><td><strong>$4,480</strong></td></tr>
+                            <tr style="background:#eff6ff;"><td colspan="4" style="font-weight:700; color:#1e40af; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em;">CONTRATO 2 — Fases 2 y 3</td></tr>
                             <tr><td>P3 — Generar pedido desde proforma</td><td><span class="phase-badge ph2">Fase 2</span></td><td>40h</td><td>$1,600</td></tr>
+                            <tr><td>P1 — Actualizar estatus semanal de pedidos</td><td><span class="phase-badge ph2">Fase 2</span></td><td>59h</td><td>$2,360</td></tr>
                             <tr><td>P4 — Registrar factura de proveedor</td><td><span class="phase-badge ph3">Fase 3</span></td><td>21h</td><td>$840</td></tr>
                             <tr><td>P5 — Registrar llegada de mercadería</td><td><span class="phase-badge ph3">Fase 3</span></td><td>36h</td><td>$1,440</td></tr>
                             <tr><td>P6 — Registrar remesa (pago de factura)</td><td><span class="phase-badge ph3">Fase 3</span></td><td>17h</td><td>$680</td></tr>
                             <tr><td>P7 — Cierre de pedido + notificación cliente</td><td><span class="phase-badge ph3">Fase 3</span></td><td>21h</td><td>$840</td></tr>
-                            <tr><td>Overhead fijo (setup, integración, testing, docs)</td><td><span class="phase-badge ph0">Overhead</span></td><td>86h</td><td>$3,440</td></tr>
-                            <tr class="subtotal"><td colspan="2"><strong>Total contrato inicial</strong></td><td><strong>368h</strong></td><td><strong>$14,720</strong></td></tr>
-                            <tr class="optional"><td>P8–P10 — Consultas, alertas, fichas de cliente</td><td><span class="phase-badge ph-opt">Fase 4</span></td><td>42h</td><td>$1,680</td></tr>
-                            <tr class="total"><td colspan="2">Total con expansión (si aplica)</td><td>410h</td><td>$16,400 USD</td></tr>
+                            <tr><td>Overhead restante (integración, testing, docs, capacitación)</td><td><span class="phase-badge ph0">Overhead</span></td><td>62h</td><td>$2,480</td></tr>
+                            <tr class="subtotal"><td colspan="2"><strong>Subtotal Contrato 2</strong></td><td><strong>256h</strong></td><td><strong>$10,240</strong></td></tr>
+                            <tr class="total"><td colspan="2">TOTAL PROYECTO COMPLETO</td><td>368h</td><td>$14,720 USD</td></tr>
+                            <tr class="optional"><td>P8–P10 — Consultas, alertas, fichas de cliente</td><td><span class="phase-badge ph-opt">Fase 4 opt.</span></td><td>42h</td><td>$1,680</td></tr>
                         </tbody>
                     </table>
-                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem;">Tasa: $40 USD/hora · ~3 horas diarias de trabajo · Diferencia con propuesta anterior: −$100 USD</p>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem;">Tasa: $40 USD/hora · ~3 horas diarias de trabajo</p>
 
-                    <h3 class="subsection-title" style="margin-top:2rem;">Estructura de Pagos — Contrato Inicial ($14,720)</h3>
+                    <h3 class="subsection-title" style="margin-top:2rem;">Estructura de Pagos</h3>
                     <table class="pricing-table">
                         <thead><tr><th>Hito</th><th>%</th><th>Monto</th><th>Cuándo</th></tr></thead>
                         <tbody>
-                            <tr><td><strong>#1</strong> Firma / Inicio</td><td>10%</td><td>$1,472</td><td>Al firmar contrato</td></tr>
-                            <tr><td><strong>#2</strong> P1 en producción (Miguel)</td><td>25%</td><td>$3,680</td><td>Semana 8</td></tr>
-                            <tr><td><strong>#3</strong> P2+P3 en producción</td><td>35%</td><td>$5,152</td><td>Semana 17</td></tr>
-                            <tr><td><strong>#4</strong> Sistema completo + cierre</td><td>30%</td><td>$4,416</td><td>Semana 26</td></tr>
-                            <tr style="border-top:2px solid var(--primary); background:#eff6ff;"><td style="font-weight:800;">TOTAL</td><td style="font-weight:800;">100%</td><td class="price-total">$14,720</td><td></td></tr>
+                            <tr style="background:#fffbeb;"><td colspan="4" style="font-weight:700; color:#92400e; font-size:0.82rem;">CONTRATO 1 · $4,480</td></tr>
+                            <tr><td><strong>#1</strong> Anticipo inicio</td><td>50%</td><td>$2,240</td><td>Al firmar Contrato 1</td></tr>
+                            <tr><td><strong>#2</strong> P2 en producción (Mauricio / Miguel)</td><td>50%</td><td>$2,240</td><td>Semana 9</td></tr>
+                            <tr style="background:#eff6ff;"><td colspan="4" style="font-weight:700; color:#1e40af; font-size:0.82rem;">CONTRATO 2 · $10,240 · (se define al iniciar)</td></tr>
+                            <tr><td><strong>#3</strong> Anticipo inicio</td><td>~30%</td><td>~$3,072</td><td>Al firmar Contrato 2</td></tr>
+                            <tr><td><strong>#4</strong> Fase 2 en producción (Comercial + Miguel)</td><td>~40%</td><td>~$4,096</td><td>Semana 17</td></tr>
+                            <tr><td><strong>#5</strong> Sistema completo + cierre</td><td>~30%</td><td>~$3,072</td><td>Semana 26</td></tr>
+                            <tr style="border-top:2px solid var(--primary); background:#eff6ff;"><td style="font-weight:800;">TOTAL PROYECTO</td><td></td><td class="price-total">$14,720</td><td></td></tr>
                         </tbody>
                     </table>
 
@@ -308,31 +345,35 @@
 
             <!-- 7. GARANTÍA -->
             <section id="garantia">
-                <h2 class="section-title">6. Garantía y Reducción de Riesgo</h2>
+                <h2 class="section-title">7. Garantía y Reducción de Riesgo</h2>
                 <div class="card">
                     <div class="alert-box" style="background:#ecfdf5; border-color:#10b981;">
-                        <strong>Si tras la primera semana de P1 en producción (Semana 9) no están satisfechos, el proyecto puede detenerse sin obligación de continuar.</strong>
+                        <strong>Fase 1 (P2 — Proformas) es un entregable autónomo y aislado. Sorimex puede evaluarlo en producción real antes de comprometerse con el resto del proyecto.</strong>
                     </div>
                     <ul class="feature-list" style="margin-top:1rem;">
-                        <li>Solo habrán desembolsado: pagos #1 y #2 = $5,152 USD</li>
+                        <li><strong>P2 opera de manera independiente</strong> — no requiere que P3, P1 ni ninguna otra fase estén listos</li>
+                        <li>Si tras probar proformas en producción (Semana 9) deciden no continuar, el proyecto se detiene sin obligación</li>
+                        <li>Solo habrán desembolsado: pagos #1 y #2 = $4,480 USD (exactamente lo ejecutado)</li>
                         <li>Se entrega todo el código desarrollado hasta ese momento</li>
-                        <li>No hay obligación de continuar con Fases 2, 3 o 4</li>
+                        <li>No hay obligación de continuar con Fases 2, 3 y 4</li>
                     </ul>
                     <h3 class="subsection-title" style="margin-top:1.5rem;">Flujo de Valor Incremental</h3>
                     <div style="background:#f8fafc; padding:1.5rem; border-radius:8px; font-family:monospace; font-size:0.88rem; line-height:2;">
                         $1,472 → Fase 0 → Infraestructura lista<br>
-                        $3,680 → Fase 1 → P1 funcionando <strong>[PUNTO DE CONFIANZA - Sem 8]</strong><br>
-                        $5,152 → Fase 2 → P2+P3 funcionando <strong>[VICTORIA COMERCIAL - Sem 17]</strong><br>
-                        $4,416 → Fase 3+Cierre → Sistema completo <strong>[CICLO COMPLETO - Sem 24]</strong>
+                        $3,680 → Fase 1 → P2 Proformas funcionando <strong>[✅ PUNTO DE SALIDA — Sem 9]</strong><br>
+                        $5,152 → Fases 2+3 → P3+P1 funcionando <strong>[VICTORIAS 2 y 3 — Sem 12 / Sem 17]</strong><br>
+                        $4,416 → Fase 4+Cierre → Sistema completo <strong>[CICLO COMPLETO — Sem 24]</strong>
                     </div>
                 </div>
             </section>
 
             <!-- 8. ROI -->
             <section id="roi">
-                <h2 class="section-title">7. Retorno de Inversión</h2>
-                <div class="card">
-                    <div class="comparison-grid">
+                <h2 class="section-title">8. Retorno de Inversión</h2>
+
+                <div class="card" style="margin-bottom:1.25rem;">
+                    <h3 class="subsection-title">Lo Cuantificable</h3>
+                    <div class="comparison-grid" style="margin-top:0.75rem;">
                         <div style="background:#f8fafc; padding:1.5rem; border-radius:8px;">
                             <strong>Escenario Conservador</strong><br>
                             Ahorro directo: $8,000 USD/año<br>
@@ -344,9 +385,7 @@
                             <strong>Payback: 1.2 años</strong>
                         </div>
                     </div>
-
-                    <!-- Dato confirmado por Miguel -->
-                    <div style="margin-top:1.5rem; padding:1.25rem 1.5rem; background:#f0fdf4; border-left:4px solid var(--success); border-radius:0 8px 8px 0;">
+                    <div style="margin-top:1.25rem; padding:1.25rem 1.5rem; background:#f0fdf4; border-left:4px solid var(--success); border-radius:0 8px 8px 0;">
                         <div style="display:flex; align-items:flex-start; gap:0.75rem;">
                             <span style="font-size:1.5rem; line-height:1;">💬</span>
                             <div>
@@ -357,14 +396,35 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <p class="p-block" style="margin-top:1.25rem; font-size:0.9rem;">Más allá del ahorro directo cuantificable: respuesta instantánea a clientes, cero errores en cálculos, y un equipo operativo enfocado en trabajo comercial y estratégico.</p>
+                <div class="card">
+                    <h3 class="subsection-title">Lo Estratégico</h3>
+                    <p class="p-block" style="font-size:0.9rem; margin-bottom:1rem;">Estos beneficios no aparecen en una hoja de cálculo, pero son los que definen si Sorimex puede escalar su operación o queda atada a las mismas personas haciendo las mismas tareas.</p>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem;">
+                        <div style="background:#f0fdf4; padding:1.2rem; border-radius:8px; border-left:3px solid var(--success);">
+                            <strong style="font-size:0.9rem;">Respuesta instantánea al cliente</strong>
+                            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">Proformas y estatus en minutos, no en horas. El cliente siente que Sorimex responde más rápido que la competencia.</p>
+                        </div>
+                        <div style="background:#f0fdf4; padding:1.2rem; border-radius:8px; border-left:3px solid var(--success);">
+                            <strong style="font-size:0.9rem;">Cero errores operativos</strong>
+                            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">Cálculos FOB, pesos y embalajes sin margen de error humano. Elimina re-trabajos, disputas y correcciones de último minuto.</p>
+                        </div>
+                        <div style="background:#f0fdf4; padding:1.2rem; border-radius:8px; border-left:3px solid var(--success);">
+                            <strong style="font-size:0.9rem;">Equipo enfocado en lo comercial</strong>
+                            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">Mauricio y Miguel dejan de ser "operadores de Access" para concentrarse en clientes, negociación y crecimiento.</p>
+                        </div>
+                        <div style="background:#f0fdf4; padding:1.2rem; border-radius:8px; border-left:3px solid var(--success);">
+                            <strong style="font-size:0.9rem;">Escalar sin contratar</strong>
+                            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">El mismo equipo puede manejar el doble de pedidos. El crecimiento no depende de añadir personal operativo.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- 9. COMPARATIVA -->
             <section id="comparativa">
-                <h2 class="section-title">8. Comparativa con Alternativas</h2>
+                <h2 class="section-title">9. Comparativa con Alternativas</h2>
                 <div class="comparison-grid">
                     <div class="card" style="opacity:0.8;">
                         <strong>Proceso manual actual</strong>
@@ -381,7 +441,7 @@
                     <strong style="color:var(--primary);">Criterio AI — Propuesta</strong>
                     <ul class="feature-list" style="margin-top:0.75rem;">
                         <li>✅ $14,720 contrato inicial · $40/h · 368h</li>
-                        <li>✅ Primera victoria semana 8 — no al final del proyecto</li>
+                        <li>✅ Primera victoria semana 9 — no al final del proyecto</li>
                         <li>✅ Expertise IA + sistemas legacy (Access/VBA 25 años)</li>
                         <li>✅ Comunicación directa, sin intermediarios</li>
                         <li>✅ Pagos alineados con valor entregado</li>
@@ -389,19 +449,7 @@
                 </div>
             </section>
 
-            <!-- 10. PRÓXIMOS PASOS -->
-            <section id="steps">
-                <h2 class="section-title">9. Próximos Pasos</h2>
-                <div class="card">
-                    <ol class="step-list" style="margin-left:1.5rem;">
-                        <li><strong>Evaluación Interna:</strong> Socializar propuesta con equipo y consultor. Evaluar presupuesto.</li>
-                        <li><strong>Reunión de Alineación:</strong> Revisión de preguntas, ajustes de alcance si necesario.</li>
-                        <li><strong>Firma y Kickoff:</strong> Contrato, NDA, entrega de accesos. Inicio Fase 0 semana 1.</li>
-                    </ol>
-                </div>
-            </section>
-
-            <!-- 11. CONTACTO -->
+            <!-- 10. CONTACTO -->
             <section id="contacto">
                 <h2 class="section-title">10. Contacto</h2>
                 <div class="card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem;">

@@ -36,8 +36,8 @@
         </div>
         <div class="meta" style="text-align:right;">
             <strong>ORDEN DE SERVICIO</strong><br>
-            Ref: SORIMEX-IA-001<br>
-            Fecha: Marzo 2026
+            Ref: SORIMEX-IA-C1<br>
+            Fecha: Abril 2026
         </div>
     </div>
 
@@ -48,16 +48,13 @@
     </div>
 
     <div class="section">
-        <div class="section-title">Alcance del Servicio — Contrato Inicial</div>
-        <p>Desarrollo e implementación de Agente IA para automatización del ciclo operativo completo de importación.</p>
+        <div class="section-title">Alcance del Servicio — Contrato 1</div>
+        <p>Desarrollo e implementación de las Fases 0 y 1 del Agente IA Sorimex, como primer compromiso contractual para validar el rendimiento del sistema antes de continuar.</p>
         <ul style="margin-top:10px; font-size:14px; line-height:1.8;">
-            <li><strong>Fase 0 (Setup, Sem 1–3):</strong> Infraestructura, accesos, arquitectura base.</li>
-            <li><strong>Fase 1 (Estatus semanal, Sem 4–8):</strong> P1 — Actualización automática de estatus de pedidos + correos a clientes. <em>Primera victoria: semana 8.</em></li>
-            <li><strong>Fase 2 (Proformas y pedidos, Sem 9–17):</strong> P2 — Crear proforma; P3 — Generar pedido desde proforma. <em>Segunda victoria: semana 17.</em></li>
-            <li><strong>Fase 3 (Ciclo completo, Sem 18–24):</strong> P4 — Registrar factura; P5 — Registrar llegada; P6 — Registrar remesa; P7 — Cierre de pedido + notificación cliente. <em>Sistema completo: semana 24.</em></li>
-            <li><strong>Cierre (Sem 25–26):</strong> Documentación, capacitación, entrega código.</li>
+            <li><strong>Fase 0 (Setup, Sem 1–3):</strong> Infraestructura, accesos, conexión a Maestro.mdb, arquitectura base.</li>
+            <li><strong>Fase 1 — P2 (Proformas, Sem 4–9):</strong> Recibe instrucción en lenguaje natural (cliente, producto, cantidades) → calcula FOB, pesos y embalajes → genera PDF idéntico al formato actual → organiza carpetas y envía borrador por email para revisión de Mauricio o Miguel antes de enviar al cliente. <em>Primera victoria: semana 9.</em></li>
         </ul>
-        <p class="note">* La Fase 4 (P8–P10: consultas, alertas, fichas de cliente) es opcional y se cotiza por separado (+$1,680 USD).</p>
+        <p class="note">* Si los resultados de Fase 1 son satisfactorios, las fases siguientes (P3, P1, P4–P7) se evalúan y contratan por separado como Contrato 2.</p>
     </div>
 
     <div class="section">
@@ -71,55 +68,45 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>P1 — Actualizar estatus semanal de pedidos</td><td>59h</td><td>$2,360</td></tr>
-                <tr><td>P2 — Crear proforma</td><td>88h</td><td>$3,520</td></tr>
-                <tr><td>P3 — Generar pedido desde proforma</td><td>40h</td><td>$1,600</td></tr>
-                <tr><td>P4 — Registrar factura de proveedor</td><td>21h</td><td>$840</td></tr>
-                <tr><td>P5 — Registrar llegada de mercadería</td><td>36h</td><td>$1,440</td></tr>
-                <tr><td>P6 — Registrar remesa (pago de factura)</td><td>17h</td><td>$680</td></tr>
-                <tr><td>P7 — Cierre de pedido + notificación cliente</td><td>21h</td><td>$840</td></tr>
-                <tr><td>Overhead fijo (setup, integración, testing, documentación)</td><td>86h</td><td>$3,440</td></tr>
-                <tr class="subtotal-row"><td>Subtotal contrato inicial</td><td>368h</td><td>$14,720</td></tr>
-                <tr class="optional-row"><td>Fase 4 opcional: P8–P10 (consultas, alertas, fichas)</td><td>42h</td><td>$1,680</td></tr>
-                <tr class="total-row"><td>TOTAL CON EXPANSIÓN (si aplica)</td><td>410h</td><td>$16,400 USD</td></tr>
+                <tr><td>Fase 0 — Setup e infraestructura</td><td>24h</td><td>$960</td></tr>
+                <tr><td>Fase 1 — P2: Creación de proformas de importación</td><td>88h</td><td>$3,520</td></tr>
+                <tr class="total-row"><td>Total Contrato 1</td><td>112h</td><td>$4,480 USD</td></tr>
             </tbody>
         </table>
-        <p class="note">Tasa: $40 USD/hora · ~3 horas de trabajo diario · Total contrato inicial: <strong>$14,720 USD</strong></p>
+        <p class="note">Tasa: $40 USD/hora · ~3 horas de trabajo diario</p>
     </div>
 
     <div class="section">
-        <div class="section-title">Esquema de Pagos — Contrato Inicial</div>
+        <div class="section-title">Esquema de Pagos — Contrato 1</div>
         <table>
             <thead>
                 <tr><th>Hito</th><th>%</th><th>Monto (USD)</th><th>Condición</th></tr>
             </thead>
             <tbody>
-                <tr><td>1. Firma / Inicio</td><td>10%</td><td>$1,472</td><td>Inmediato al firmar</td></tr>
-                <tr><td>2. P1 en producción (Miguel)</td><td>25%</td><td>$3,680</td><td>Semana 8</td></tr>
-                <tr><td>3. P2+P3 en producción</td><td>35%</td><td>$5,152</td><td>Semana 17</td></tr>
-                <tr><td>4. Sistema completo + cierre</td><td>30%</td><td>$4,416</td><td>Semana 26</td></tr>
-                <tr class="total-row"><td>TOTAL</td><td>100%</td><td>$14,720 USD</td><td></td></tr>
+                <tr><td>1. Inicio</td><td>50%</td><td>$2,240</td><td>Al firmar esta orden</td></tr>
+                <tr><td>2. P2 en producción (Mauricio / Miguel)</td><td>50%</td><td>$2,240</td><td>Semana 9 — sistema funcionando</td></tr>
+                <tr class="total-row"><td>TOTAL CONTRATO 1</td><td>100%</td><td>$4,480 USD</td><td></td></tr>
             </tbody>
         </table>
-        <p class="note">* Si se activa Fase 4, se agrega un pago adicional de $1,680 USD al iniciar dicha fase (Sem 27).</p>
+        <p class="note">* Las fases siguientes (P3, P1, P4–P7) se contratan por separado como Contrato 2 una vez aprobada esta etapa.</p>
     </div>
 
     <div class="section">
         <div class="section-title">Garantía de Satisfacción</div>
         <p style="font-size:13px; font-style:italic;">
-            Si tras la primera semana de uso de P1 en producción (Semana 9) el cliente no está satisfecho con el desempeño del sistema,
-            el proyecto puede detenerse sin obligación de continuar con las fases siguientes,
-            entregándose todo el código fuente desarrollado hasta la fecha.
-            Solo se habrán desembolsado los pagos de los hitos 1 y 2 ($5,152 USD).
+            Si al completar la Semana 9 (P2 en producción) el resultado no es satisfactorio,
+            el proyecto puede detenerse sin obligación de continuar con las fases siguientes.
+            Sorimex recibe todo el código desarrollado hasta ese punto.
+            Solo se habrán desembolsado los pagos #1 y #2 ($4,480 USD).
         </p>
     </div>
 
     <div class="section">
         <div class="section-title">Incluye</div>
         <ul style="font-size:13px; line-height:1.8;">
-            <li>368 horas de desarrollo especializado (Python, IA, Access)</li>
-            <li>7 procesos automatizados del ciclo completo de importación</li>
-            <li>3 meses de soporte post-entrega (sistema en producción)</li>
+            <li>112 horas de desarrollo especializado (Python, IA, Access)</li>
+            <li>P2 — Proformas automatizadas (Contrato 1)</li>
+            <li>1 mes de soporte post-entrega de esta etapa</li>
             <li>Documentación técnica y manual de usuario</li>
             <li>Capacitación del equipo Sorimex</li>
             <li>Código fuente completo en repositorio Git</li>
